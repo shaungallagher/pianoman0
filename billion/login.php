@@ -1,4 +1,3 @@
-// Copyright 2024-2025 PianoMan0
 <?php
 
 session_start();
