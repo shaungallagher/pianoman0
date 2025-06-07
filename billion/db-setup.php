@@ -14,8 +14,6 @@ try {
         profile TEXT
     )");
 
-    // This is where you can add users.
-    // Put your family and friends' names and passwords here.
     $users = array(
         array("PianoMan0", getenv('USER_PASSWORD_1')),
         array("Ryan (Jules)", getenv('USER_PASSWORD_2')),
@@ -26,6 +24,11 @@ try {
     foreach ($users as $user) {
         $username = $user[0];
         $password = $user[1];
+
+        if (!empty($password) && strlen($password) < 60) {
+            $password = password_hash($password, PASSWORD_DEFAULT);
+        }
+
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);        
         $stmt->execute();
@@ -70,7 +73,7 @@ try {
         FOREIGN KEY (post_id) REFERENCES posts(id)
     )");
 
-    // Create messsages table
+    // Create messages table
     $db->exec("CREATE TABLE IF NOT EXISTS messages (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         to_user_id INTEGER NOT NULL,
