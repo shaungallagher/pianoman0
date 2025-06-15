@@ -25,3 +25,11 @@ jobs:
         rsync -avz --delete \
           -e "ssh -i ~/.ssh/id_ed25519" \
           ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
+
+    - name: Export all other secrets as env vars
+      env:
+        USER_PASSWORD_1: ${{ secrets.USER_PASSWORD_1 }}
+        USER_PASSWORD_2: ${{ secrets.USER_PASSWORD_1 }}
+      run: |
+        echo "USER_PASSWORD_1=$USER_PASSWORD_1"
+        echo "USER_PASSWORD_2=$USER_PASSWORD_2"
