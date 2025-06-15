@@ -4,7 +4,7 @@ try {
     $db = new PDO('sqlite:posts.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // $db->exec("DROP TABLE users");
+    $db->exec("DROP TABLE users");
 
     // Create user table
     $db->exec("CREATE TABLE IF NOT EXISTS users (
@@ -19,7 +19,7 @@ try {
         array("Ryan (Jules)", getenv('USER_PASSWORD_2')),
     );
 
-    $stmt = $db->prepare("INSERT OR IGNORE INTO users (username, password) VALUES (:username, :password)");
+    $stmt = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
 
     foreach ($users as $user) {
         $username = $user[0];
