@@ -29,7 +29,7 @@ jobs:
     - name: Export all other secrets as env vars
       env:
         USER_PASSWORD_1: ${{ secrets.USER_PASSWORD_1 }}
-        USER_PASSWORD_2: ${{ secrets.USER_PASSWORD_1 }}
+        USER_PASSWORD_2: ${{ secrets.USER_PASSWORD_2 }}
       run: |
-        echo "USER_PASSWORD_1=$USER_PASSWORD_1"
-        echo "USER_PASSWORD_2=$USER_PASSWORD_2"
+        export USER_PASSWORD_1=${{ secrets.USER_PASSWORD_1 }}
+        export USER_PASSWORD_2=${{ secrets.USER_PASSWORD_2 }}
