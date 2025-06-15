@@ -4,7 +4,7 @@ try {
     $db = new PDO('sqlite:posts.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //$db->exec("DROP TABLE users");
+    // $db->exec("DROP TABLE users");
 
     // Create user table
     $db->exec("CREATE TABLE IF NOT EXISTS users (
