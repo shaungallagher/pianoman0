@@ -120,7 +120,7 @@ a {
 
 body.dark-mode, [data-theme="dark"] {
   background-color: #121212;
-  color: black;
+  color: #000;
 }
 
 .dark-mode a, [data-theme="dark"] a {
