@@ -100,6 +100,17 @@ if ($type === 'admin_action') {
     exit;
 }
 
+if ($type == "password") {
+    $password = $_POST["password"] ?? "";
+    if ($password === getenv("ENTRY_PASSWORD")) {
+       header("Location: call.html");
+    }
+    else {
+        echo "Incorrect password! 67 bozo";
+        exit;
+    }
+}
+
 // -- Heartbeat --
 if ($type === 'heartbeat') {
     $users = get_users($users_file);
