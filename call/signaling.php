@@ -40,7 +40,7 @@ $signals_file = "$dir/$room-signals.txt";
 $chat_file = "$dir/$room-chat.txt";
 $admin_file = "$dir/$room-admin.json";
 
-$ROOM_ADMIN_PASSWORD = getenv('ROOM_ADMIN_PASSWORD') ?: "GoDodgers!";
+$ROOM_ADMIN_PASSWORD = getenv('ROOM_ADMIN_PASSWORD');
 
 // --- File helpers with locking ---
 function get_users($users_file) {
