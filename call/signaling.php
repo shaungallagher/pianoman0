@@ -18,6 +18,17 @@ $admin_password = $_POST['admin_password'] ?? '';
 $admin_token = $_POST['admin_token'] ?? '';
 $action = clean($_POST['action'] ?? '');
 
+if ($type == "password") {
+    $password = $_POST["password"] ?? "";
+    if ($password === getenv("ENTRY_PASSWORD")) {
+       header("Location: call.html");
+    }
+    else {
+        echo "Incorrect password! 67 bozo";
+        exit;
+    }
+}
+
 // --- Validate room/user ---
 if (!$room || !$user && !in_array($type, ['admin_login','get_users','get_signals','chat_get'])) {
     http_response_code(400);
@@ -100,16 +111,6 @@ if ($type === 'admin_action') {
     exit;
 }
 
-if ($type == "password") {
-    $password = $_POST["password"] ?? "";
-    if ($password === getenv("ENTRY_PASSWORD")) {
-       header("Location: call.html");
-    }
-    else {
-        echo "Incorrect password! 67 bozo";
-        exit;
-    }
-}
 
 // -- Heartbeat --
 if ($type === 'heartbeat') {
