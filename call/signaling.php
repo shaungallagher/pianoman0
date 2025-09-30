@@ -19,6 +19,7 @@ $admin_token = $_POST['admin_token'] ?? '';
 $action = clean($_POST['action'] ?? '');
 
 if ($type == "password") {
+    include("env.php");
     $password = $_POST["password"] ?? "";
     if ($password === getenv("ENTRY_PASSWORD")) {
        header("Location: call.html");
