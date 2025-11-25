@@ -51,7 +51,6 @@ body {
 main {
     width: 100%;
     background: var(--main-background);
-    /* Remove height: 100% */
 }
 
 /* Section Styles */
@@ -59,7 +58,7 @@ main {
     margin-top: 0;
     padding-top: 70px;
     position: relative;
-    min-height: 100vh; /* Only home uses min-height: 100vh */
+    min-height: 100vh;
 }
 
 #portfolio,
@@ -75,7 +74,6 @@ main {
     color: var(--main-fonts-color);
     background-color: var(--main-background);
     width: 100%;
-    /* Remove min-height: 100vh */
 }
 
 #home {
@@ -140,7 +138,6 @@ header:hover {
     background: var(--main-decor-color);
 }
 
-/* Content Styles */
 .intro {
     text-align: center;
     color: var(--main-fonts-color);
@@ -174,7 +171,6 @@ p {
     font-family: var(--main-font-family);
 }
 
-/* Background Filter */
 .filter {
     background: url('https://images.unsplash.com/photo-1544099858-75feeb57f01b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80') no-repeat;
     background-size: cover;
@@ -188,7 +184,6 @@ p {
     z-index: 0;
 }
 
-/* Portfolio Card Styles */
 .portfolio-cards {
     display: flex;
     flex-wrap: wrap;
@@ -337,6 +332,47 @@ hr {
         transform: translateX(0%);
     }
 }
+
+#badges-88x31 {
+    margin: 0 auto;
+    padding: var(--section-padding) 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-fonts-color);
+    background-color: var(--main-background);
+    width: 100%;
+}
+
+#badges-88x31 h3 {
+    font-size: 32px;
+    text-shadow: 0 0 20px var(--main-decor-color);
+}
+
+#badges-88x31 hr {
+    margin-top: 8px;
+}
+
+.badge-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.badge-grid img {
+    width: 88px;
+    height: 31px;
+    image-rendering: pixelated;
+    border-radius: 4px;
+    border: 1px solid var(--main-decor-color);
+    background: #111;
+}
 </style>
 </head>
 <body>
@@ -363,27 +399,21 @@ hr {
                 <div class="filter"></div>
                 <section class="intro">
                     <h3>PianoMan0<hr></h3>
-                    <p>Hi, I'm PianoMan0. </p>
-                    <p>HTML, CSS, Javascript, Python, Java, PHP, Scratch</p>
-                    <div id="webring-wrapper">
-                        <a href="https://webring.hackclub.com/" id="previousBtn" class="webring-anchor" title="Previous">‹</a>
-                        <a href="https://webring.hackclub.com/" class="webring-logo" title="Hack Club Webring"></a>
-                        <a href="https://webring.hackclub.com/" id="nextBtn" class="webring-anchor" title="Next">›</a>
-                    </div>
-                    <script src="https://webring.hackclub.com/embed.min.js"></script>
+                    <p>Hi, I'm PianoMan0.</p>
+                    <p>Teen fullstack developer, coding with community.</p>
                 </section>
             </div>
 
             <div id="portfolio">
                 <a name="aboutme"></a>
                 <h3>About Me</h3><hr>
-                <p>I'm a 15-year-old fullstack developer. I was coding on <a href="https://scratch.mit.edu">Scratch</a> for a long time before I switched to "actual" programming languages when I was 11. I coded on Replit for 2 years before I quit due to changes. I now primarily code on VS Code, often using <a href="https://webmaker.app/app">Webmaker</a> for testing and <a href="https://github.com/pianoman0">Github</a> to publish my projects. I am currently a member of <a href="https://hack.club">Hack Club</a>, which is an online community of teens that code together. I've run a couple of events for Hack Club, like <a href="http://hacklet.hackclub.com">Hacklet</a> and <a href="http://twist.hackclub.dev">Twist</a>. Combined they received over 150 submissions and we gave out thousands of dollars in prizes. I also helped with Hack Club's <a href="https://summer.hackclub.com">Summer of Making</a>. Recently, I attended Daydream, a worldwide hackathon by Hack Club for teenagers! Right now, I'm working on some new events for Hack Club and coding fun side projects along the way.</p>
+                <p>I'm a 15-year-old fullstack developer. I was coding on <a href="https://scratch.mit.edu">Scratch</a> for a long time before I switched to "actual" programming languages when I was 11. I coded on Replit for 2 years before I quit due to changes. I now primarily code on VS Code, often using <a href="https://github.com/pianoman0">Github</a> to publish my projects. I am a member of <a href="https://hack.club">Hack Club</a>, which is an online community of teens that code together. I've run a couple of events for Hack Club, like <a href="http://hacklet.hackclub.com">Hacklet</a> and <a href="http://twist.hackclub.dev">Twist</a>. Combined they received over 150 submissions and we gave out thousands of dollars in prizes. I also helped with Hack Club's <a href="https://summer.hackclub.com">Summer of Making</a>, and I'm a member of their <a href="https://hackclub.com/team">team</a>. Recently, I attended Daydream, a worldwide hackathon by Hack Club for teenagers! Right now, I'm working on some new events for Hack Club and coding fun side projects along the way.</p>
             </div>
 
             <div id="actualportfolio">
                 <a name="mythemes"></a>
                 <h3>Portfolio<hr></h3>
-                <p>Here are some of my favorite projects! Click the screenshots or links to check them out.</p>
+                <p>Here are some of my favorite projects I've built! Click the screenshots or links to check them out.</p>
                 <div class="portfolio-cards">
                     <!-- Project 1 -->
                     <div class="card">
@@ -414,7 +444,7 @@ hr {
                         </a>
                         <div class="card-title">Clanker World</div>
                         <div class="card-desc">
-                            A game about an AI future, made at Daydream DC, a Hack Club hackathon, with <a href="https://github.com/tailhaver" target="_blank">Taggie</a> and <a href="https://github.com/isa-yan" target="_blank">Isa!</a>.
+                            A game about an AI future, made at Daydream DC, a Hack Club hackathon, with <a href="https://github.com/tailhaver" target="_blank">Taggie</a> and <a href="https://github.com/isa-yan" target="_blank">Isa!</a> We won 2nd place.
                         </div>
                         <a class="card-link" href="https://github.com/PianoMan0/Daydream-Project" target="_blank">View Project!</a>
                     </div>
@@ -449,7 +479,7 @@ hr {
                 </div>
                 <div class="faq-item">
                     <p>Q: Have you made any hardware projects?</p>
-                    <p>A: I've made a bluetooth speaker! I'm currently making my own intercom system for <a href="https://blueprint.hackclub.com">Blueprint</a>, a Hack Club <a href="https://ysws.hackclub.com">YSWS</a>.</p>
+                    <p>A: I've made a bluetooth speaker! I'm mostly a software developer, but I'd love to try more hardware projects in the future.</p>
                 </div>
                 <div class="faq-item">
                     <p>Q: Are you on Replit?</p>
@@ -459,6 +489,81 @@ hr {
                     <p>Q: Will you help me with my project?</p>
                     <p>A: Sure, I'd love to!</p>
                 </div>
+            </div>
+
+            <div id="badges-88x31">
+            <h3>88x31s<hr></h3>
+            <div class="badge-grid">
+            <a href="https://vscode.dev" target="_blank">
+            <img src="vscode.gif" alt="Visual Studio Code 88x31 badge">
+            </a>
+            <a href="https://php.net" target="_blank">
+            <img src="php.gif" alt="PHP logo 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="nowar.png" alt="No War 88x31 peace badge">
+            </a>
+            <a href="https://pianoman0.com/#"">
+            <img src="hackerpowered.gif" alt="Hacker Powered 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#"">
+            <img src="gothtml.png" alt="Got HTML 88x31 web button">
+            </a>
+            <a href="https://github.com/pianoman0" target="_blank">
+            <img src="github.png" alt="GitHub logo 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="nb_noproblem.jpg" alt="Non-binary no problem 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="stopmicrosoft.gif" alt="Stop Microsoft 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="transrights.png" alt="Pride rights 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="htmllearnittoday.gif" alt="Learn HTML today 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="nonazis.gif" alt="No Nazis 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="minecraft.gif" alt="Minecraft 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="dreaminhtml.gif" alt="Dreaming in HTML 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="ihatemicrosoft.gif" alt="Anti-Microsoft 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="javascriptnow.png" alt="JavaScript Now 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="supportwikipedia.gif" alt="Support Wikipedia 88x31 badge">
+            </a>
+            <a href="https://hack.club" target="_blank">
+            <img src="hackclub.gif" alt="Hack Club 88x31 badge">
+            </a>
+            <a href="https://lynn.pt" target="_blank">
+            <img src="lynn.png" alt="Lynn 88x31 personal badge">
+            </a>
+            <a href="https://ivie.codes" target="_blank">
+            <img src="ivie.png" alt="Ivie 88x31 personal badge">
+            </a>
+            <a href="https://3kh0.net" target="_blank">
+            <img src="temp_3kh0.png" alt="3kh0 88x31 personal badge">
+            </a>
+            <a href="https://skyfall.dev" target="_blank">
+            <img src="mahad.png" alt="Mahad 88x31 personal badge">
+            </a>
+            <a href="https://bunnyguy.foo" target="_blank">
+            <img src="bunnyguy.gif" alt="Pixel bunny character 88x31 badge">
+            </a>
+            <a href="https://hack.app" target="_blank">
+            <img src="nest.png" alt="Nest 88x31 personal badge">
+            </a>
+            </div>
             </div>
         </main>
     </div>
