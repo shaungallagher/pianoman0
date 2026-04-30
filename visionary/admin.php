@@ -113,12 +113,12 @@ if ($is_admin_logged_in) {
 // Handle user actions
 $message = '';
 $csrf_token = htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8');
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf()) {
         $message = 'Invalid CSRF token. Please refresh and try again.';
     } elseif (isset($_POST['admin_password'])) {
         if ($ADMIN_PASSWORD === null) {
-            $message = 'Admin login is not configured. Set VISIONARY_ADMIN_PASSWORD env var or add it to secrets.txt.';
+            $message = 'Admin login is not configured. Set VISIONARY_ADMIN_PASSWORD env var or add it to .env.';
         } else {
             $provided = (string)($_POST['admin_password'] ?? '');
             if (function_exists('hash_equals') ? hash_equals($ADMIN_PASSWORD, $provided) : $ADMIN_PASSWORD === $provided) {
@@ -525,7 +525,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="login-box">
                     <h2>🔐 Admin Login</h2>
                     <?php if ($ADMIN_PASSWORD === null): ?>
-                        <p style="color: var(--muted); margin-bottom: 30px;">Admin login is not configured. Set <strong>VISIONARY_ADMIN_PASSWORD</strong> as an environment variable or add it to <code>secrets.txt</code>. See <a href="config.php.example">config.php.example</a> for guidance.</p>
+                        <p style="color: var(--muted); margin-bottom: 30px;">Admin login is not configured. Set <strong>VISIONARY_ADMIN_PASSWORD</strong> as an environment variable or add it to <code>.env</code>. See <a href="config.php.example">config.php.example</a> for guidance.</p>
                     <?php else: ?>
                         <p style="color: var(--muted); margin-bottom: 30px;">Enter the admin password to access the dashboard</p>
                         <form method="POST">
