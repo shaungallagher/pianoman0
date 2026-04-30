@@ -1,11 +1,20 @@
 <?php
 
 $secrets = [];
-$secretsFile = __DIR__ . '/secrets.txt';
-if (is_file($secretsFile) && is_readable($secretsFile)) {
+$dotEnv = __DIR__ . '/.env';
+$legacySecrets = __DIR__ . '/secrets.txt';
+$secretsFile = null;
+if (is_file($dotEnv) && is_readable($dotEnv)) {
+    $secretsFile = $dotEnv;
+} elseif (is_file($legacySecrets) && is_readable($legacySecrets)) {
+    // fall back to legacy file if present
+    $secretsFile = $legacySecrets;
+}
+
+if ($secretsFile) {
     // Support two formats:
-    //  - KEY=VALUE lines (preferred)
-    //  - a PHP file that returns an associative array (legacy/misplaced)
+    //  - KEY=VALUE lines (preferred, .env)
+    //  - a PHP file that returns an associative array (legacy)
     $content = @file_get_contents($secretsFile, false, null, 0, 8);
     if ($content !== false && substr(ltrim($content), 0, 2) === '<?') {
         $data = @include $secretsFile;
@@ -13,8 +22,10 @@ if (is_file($secretsFile) && is_readable($secretsFile)) {
             foreach ($data as $k => $v) {
                 $k = trim((string)$k);
                 $secrets[$k] = $v;
-                // also expose uppercase env-style keys for compatibility
                 $secrets[strtoupper($k)] = $v;
+                if (function_exists('putenv')) @putenv("$k=$v");
+                $_ENV[$k] = $v;
+                $_SERVER[$k] = $v;
             }
         }
     } else {
@@ -24,7 +35,16 @@ if (is_file($secretsFile) && is_readable($secretsFile)) {
             if ($line === '' || $line[0] === '#') continue;
             if (strpos($line, '=') !== false) {
                 [$k, $v] = explode('=', $line, 2);
-                $secrets[trim($k)] = trim($v);
+                $k = trim($k);
+                $v = trim($v);
+                if ((strlen($v) >= 2) && (($v[0] === '"' && substr($v, -1) === '"') || ($v[0] === "'" && substr($v, -1) === "'"))) {
+                    $v = substr($v, 1, -1);
+                }
+                $secrets[$k] = $v;
+                $secrets[strtoupper($k)] = $v;
+                if (function_exists('putenv')) @putenv("$k=$v");
+                $_ENV[$k] = $v;
+                $_SERVER[$k] = $v;
             }
         }
     }
@@ -35,6 +55,7 @@ function env_val($name, $default = '') {
     $v = getenv($name);
     if ($v !== false) return $v;
     if (isset($secrets[$name])) return $secrets[$name];
+    if (isset($secrets[strtoupper($name)])) return $secrets[strtoupper($name)];
     return $default;
 }
 
