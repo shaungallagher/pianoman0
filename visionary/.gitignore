@@ -1,0 +1,11 @@
+secrets.txt
+.env
+filter.txt
+
+data/
+uploads/
+
+.vscode/
+node_modules/
+vendor/
+.DS_Store
