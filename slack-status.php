@@ -42,16 +42,6 @@ if ($lookup && isset($lookup['ok']) && $lookup['ok'] && isset($lookup['user']['i
     $userId = $lookup['user']['id'];
 }
 
-if (!$userId) {
-    $list = slack_api_call('https://slack.com/api/users.list', $token);
-    if ($list && isset($list['ok']) && $list['ok'] && isset($list['members'])) {
-        foreach ($list['members'] as $m) {
-            if (empty($m) || !isset($m['name'])) continue;
-            if (strtolower($m['name']) === strtolower($user)) { $userId = $m['id']; break; }
-            if (isset($m['profile']) && isset($m['profile']['display_name']) && strtolower($m['profile']['display_name']) === strtolower($user)) { $userId = $m['id']; break; }
-        }
-    }
-}
 
 if (!$userId) {
     echo json_encode(['ok' => false, 'error' => 'user_not_found']);
