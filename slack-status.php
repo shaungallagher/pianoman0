@@ -36,7 +36,7 @@ function slack_api_call($url, $token) {
 
 $userId = null;
 
-$email = $user . '@example.com';
+$email = 'joel@pressbin.com';
 $lookup = slack_api_call('https://slack.com/api/users.lookupByEmail?email=' . urlencode($email), $token);
 if ($lookup && isset($lookup['ok']) && $lookup['ok'] && isset($lookup['user']['id'])) {
     $userId = $lookup['user']['id'];
