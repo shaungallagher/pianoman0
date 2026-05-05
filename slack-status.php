@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-$user = isset($_GET['user']) && $_GET['user'] !== '' ? $_GET['user'] : 'pianoman0';
+$user = 'pianoman0';
 $token = getenv('SLACK_BOT_TOKEN');
 if (!$token) {
     echo json_encode(['ok' => false, 'error' => 'no_token']);
