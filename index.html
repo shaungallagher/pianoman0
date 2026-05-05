@@ -18,6 +18,7 @@
 <link rel="icon" href="pianoman0newprofilepic.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="script.js"></script>
+<script src="slack-status.js" defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
@@ -373,6 +374,38 @@ hr {
     border: 1px solid var(--main-decor-color);
     background: #111;
 }
+
+/* Slack status widget */
+#slack-status-widget {
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+}
+#slack-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(33,37,46,0.85);
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--main-decor-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    font-weight: 600;
+    color: var(--main-fonts-color);
+}
+#slack-status-indicator .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #9e9e9e;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+#slack-status-indicator.online { border-color: #00e676; }
+#slack-status-indicator.offline { border-color: #9e9e9e; }
+#slack-status-indicator.loading { border-color: var(--main-decor-color); }
+#slack-status-indicator .text { font-size: 1rem; }
 </style>
 </head>
 <body>
@@ -398,6 +431,12 @@ hr {
             <div id="home">
                 <div class="filter"></div>
                 <section class="intro">
+                    <div id="slack-status-widget">
+                        <div id="slack-status-indicator" class="loading">
+                            <span class="dot"></span>
+                            <span class="text">Checking Slack...</span>
+                        </div>
+                    </div>
                     <h3>PianoMan0<hr></h3>
                     <p>Hi, I'm PianoMan0.</p>
                     <p>Teen fullstack developer with 5 years of experience.</p>
@@ -407,7 +446,7 @@ hr {
             <div id="portfolio">
                 <a name="aboutme"></a>
                 <h3>About Me</h3><hr>
-                <p>I'm a 16-year-old fullstack developer. I was coding on <a href="https://scratch.mit.edu" target="_blank">Scratch</a> for a long time before I switched to "actual" programming languages when I was 11. I coded on Replit for 2 years before I quit due to changes. I now primarily code on VS Code, often using <a href="https://github.com/pianoman0" target="_blank">Github</a> to publish my projects. I am a member of <a href="https://hack.club" target="_blank">Hack Club</a>, which is an online community of teens that code together. I've run a couple of events for Hack Club, like <a href="http://hacklet.hackclub.com" target="_blank">Hacklet</a> and <a href="http://twist.hackclub.dev" target="_blank">Twist</a>. Combined they received over 150 submissions and we gave out thousands of dollars in prizes. I also helped with Hack Club's <a href="https://summer.hackclub.com" target="_blank">Summer of Making</a>, and I'm a member of their <a href="https://hackclub.com/team" target="_blank"> community team</a>. Recently, I attended Daydream, a worldwide hackathon by Hack Club for teenagers! Right now, I'm working on some new events for Hack Club, helping with our new event <a href="https://flavortown.hack.club/QXWVWWNE" target="_blank">Flavortown</a> and coding fun side projects along the way.</p>
+                <p>I'm a 16-year-old fullstack developer. I was coding on <a href="https://scratch.mit.edu" target="_blank">Scratch</a> for a long time before I switched to "actual" programming languages when I was 11. I coded on Replit for 2 years before I quit due to changes. I now primarily code on VS Code, often using <a href="https://github.com/pianoman0" target="_blank">Github</a> to publish my projects. I am a member of <a href="https://hack.club" target="_blank">Hack Club</a>, which is an online community of teens that code together. I've run a couple of events for Hack Club, like <a href="http://hacklet.hackclub.com" target="_blank">Hacklet</a> and <a href="http://twist.hackclub.dev" target="_blank">Twist</a>. Combined they received over 150 submissions and we gave out thousands of dollars in prizes. I also helped with Hack Club's <a href="https://summer.hackclub.com" target="_blank">Summer of Making</a>, and I'm a member of their <a href="https://hackclub.com/team" target="_blank"> community team</a>. Recently, I attended Daydream, a worldwide hackathon by Hack Club for teenagers! Right now, I'm working on some new events for Hack Club, helping with our event <a href="https://flavortown.hack.club/QXWVWWNE" target="_blank">Flavortown</a> and coding fun side projects along the way.</p>
             </div>
 
             <div id="actualportfolio">
@@ -418,7 +457,7 @@ hr {
                     <!-- Project 1 -->
                     <div class="card">
                         <a href="https://github.com/PianoMan0/Billion" target="_blank">
-                            <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/06e00da35ef41b95d2db82bc2a92f6357312b4bc_billionpromo.png" alt="Billion Screenshot"/>
+                            <img src="https://cdn.hackclub.com/019df9fa-12ad-7e23-8da0-6e00f54d28c4/billionpromo__1_.png" alt="Billion Screenshot"/>
                         </a>
                         <div class="card-title">Billion</div>
                         <div class="card-desc">
@@ -429,7 +468,7 @@ hr {
                     <!-- Project 2 -->
                     <div class="card">
                         <a href="https://github.com/Pianoman0/twist" target="_blank">
-                            <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/e2887a1286eb8488a9ec3a1697faccd5702c7bf3_image.png" alt="Twist Screenshot"/>
+                            <img src="https://cdn.hackclub.com/019df9f9-96db-7378-9be6-7f45ba9b88f8/image__33_.png" alt="Twist Screenshot"/>
                         </a>
                         <div class="card-title">Twist</div>
                         <div class="card-desc">
@@ -440,7 +479,7 @@ hr {
                     <!-- Project 3 -->
                     <div class="card">
                         <a href="https://github.com/PianoMan0/Daydream-Project" target="_blank">
-                            <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/c682b741f35da088ba4c984de3dccf7f1f693ce8_image.png" alt="Clanker World Screenshot"/>
+                            <img src="https://cdn.hackclub.com/019df9fb-4adc-745c-a44c-94b1ee7be566/image__34_.png" alt="Clanker World Screenshot"/>
                         </a>
                         <div class="card-title">Clanker World</div>
                         <div class="card-desc">
@@ -562,6 +601,9 @@ hr {
             </a>
             <a href="https://v1c.rocks" target="_blank">
             <img src="vic.png" alt="Vic 88x31 badge">
+            </a>
+            <a href="https://hex4.xyz" target="_blank">
+            <img src="hex4-88x31.gif" alt="Hex4 88x31 badge">
             </a>
             <a href="https://sundial.city" target="_blank">
             <img src="bunnyguy2.gif" alt="Bunnyguy 88x31 badge">
