@@ -1,79 +1,3 @@
-<?php
-function slack_api_call($url) {
-    $token = getenv('SLACK_BOT_TOKEN');
-    if (!$token) return null;
-    if (function_exists('curl_version')) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $token]);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        $res = curl_exec($ch);
-        curl_close($ch);
-        if (!$res) return null;
-        $json = json_decode($res, true);
-        return $json;
-    }
-    $opts = [
-        'http' => [
-            'method' => 'GET',
-            'header' => "Authorization: Bearer " . getenv('SLACK_BOT_TOKEN') . "\r\n",
-            'timeout' => 5,
-        ]
-    ];
-    $context = stream_context_create($opts);
-    $res = @file_get_contents($url, false, $context);
-    if ($res === false) return null;
-    return json_decode($res, true);
-}
-
-function get_user_id_by_username($username) {
-    $email = $username . '@example.com';
-    $res = slack_api_call('https://slack.com/api/users.lookupByEmail?email=' . urlencode($email));
-    if ($res && isset($res['ok']) && $res['ok'] && isset($res['user']['id'])) {
-        return $res['user']['id'];
-    }
-    $res = slack_api_call('https://slack.com/api/users.list');
-    if ($res && isset($res['ok']) && $res['ok'] && isset($res['members'])) {
-        foreach ($res['members'] as $m) {
-            if (!isset($m['name'])) continue;
-            if (strtolower($m['name']) === strtolower($username)) return $m['id'];
-            if (isset($m['profile']) && isset($m['profile']['display_name']) && strtolower($m['profile']['display_name']) === strtolower($username)) return $m['id'];
-        }
-    }
-    return null;
-}
-
-function get_slack_presence($username) {
-    $userId = get_user_id_by_username($username);
-    if (!$userId) return null;
-    $res = slack_api_call('https://slack.com/api/users.getPresence?user=' . urlencode($userId));
-    if ($res && isset($res['ok']) && $res['ok'] && isset($res['presence'])) {
-        return $res['presence'];
-    }
-    return null;
-}
-
-$username = 'pianoman0';
-$presence = null;
-$token = getenv('SLACK_BOT_TOKEN');
-if ($token) {
-    $presence = get_slack_presence($username);
-}
-if ($presence === 'active' || $presence === 'online') {
-    $slack_class = 'online';
-    $slack_text = '@' . $username . ' is online';
-    $dot_color = '#00e676';
-} elseif ($presence === null) {
-    $slack_class = 'offline';
-    $slack_text = 'Status unavailable';
-    $dot_color = '#ff7043';
-} else {
-    $slack_class = 'offline';
-    $slack_text = '@' . $username . ' is offline';
-    $dot_color = '#9e9e9e';
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +18,7 @@ if ($presence === 'active' || $presence === 'online') {
 <link rel="icon" href="pianoman0newprofilepic.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="script.js"></script>
+<script src="slack-status.js" defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
@@ -292,7 +217,6 @@ p {
     height: 170px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 15px;
     margin-bottom: 15px;
     border: 2px solid var(--main-decor-color);
     background: #111;
@@ -508,9 +432,9 @@ hr {
                 <div class="filter"></div>
                 <section class="intro">
                     <div id="slack-status-widget">
-                        <div id="slack-status-indicator" class="<?php echo htmlspecialchars($slack_class); ?>">
-                            <span class="dot" style="background: <?php echo htmlspecialchars($dot_color); ?>;"></span>
-                            <span class="text"><?php echo htmlspecialchars($slack_text); ?></span>
+                        <div id="slack-status-indicator" class="loading">
+                            <span class="dot"></span>
+                            <span class="text">Checking Slack...</span>
                         </div>
                     </div>
                     <h3>PianoMan0<hr></h3>
@@ -594,9 +518,114 @@ hr {
                 </div>
                 <div class="faq-item">
                     <p>Q: Have you made any hardware projects?</p>
+                    <p>A: I've made a bluetooth speaker! I'm mostly a software developer, but I'd love to try more hardware projects in the future.</p>
                 </div>
+                <div class="faq-item">
+                    <p>Q: Are you on Replit?</p>
+                    <p>A: I have a <a href='https://replit.com/@pianoman0'>Replit account</a>. I quit due to changes, and only check it every couple months, but back in the day I had over 210 followers.</p>
+                </div>
+                <div class="faq-item">
+                    <p>Q: Will you help me with my project?</p>
+                    <p>A: Sure, I'd love to!</p>
+                </div>
+            </div>
+
+            <div id="badges-88x31">
+            <h3>88x31s<hr></h3>
+            <div class="badge-grid">
+            <a href="https://vscode.dev" target="_blank">
+            <img src="vscode.gif" alt="Visual Studio Code 88x31 badge">
+            </a>
+            <a href="https://php.net" target="_blank">
+            <img src="php.gif" alt="PHP logo 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="nowar.png" alt="No War 88x31 peace badge">
+            </a>
+            <a href="https://pianoman0.com/#"">
+            <img src="hackerpowered.gif" alt="Hacker Powered 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#"">
+            <img src="gothtml.png" alt="Got HTML 88x31 web button">
+            </a>
+            <a href="https://github.com/pianoman0" target="_blank">
+            <img src="github.png" alt="GitHub logo 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="nb_noproblem.jpg" alt="Non-binary no problem 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="stopmicrosoft.gif" alt="Stop Microsoft 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="transrights.png" alt="Pride rights 88x31 badge">
+            </a>
+            <a href="https://w.wiki/Pnc" target="_blank">
+            <img src="htmllearnittoday.gif" alt="Learn HTML today 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="nonazis.gif" alt="No Nazis 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="minecraft.gif" alt="Minecraft 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="dreaminhtml.gif" alt="Dreaming in HTML 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="ihatemicrosoft.gif" alt="Anti-Microsoft 88x31 badge">
+            </a>
+            <a href="https://w.wiki/WM8" target="_blank">
+            <img src="javascriptnow.png" alt="JavaScript Now 88x31 badge">
+            </a>
+            <a href="https://pianoman0.com/#">
+            <img src="supportwikipedia.gif" alt="Support Wikipedia 88x31 badge">
+            </a>
+            <a href="https://hack.club" target="_blank">
+            <img src="hackclub.gif" alt="Hack Club 88x31 badge">
+            </a>
+            <a href="https://lynn.pt" target="_blank">
+            <img src="lynn.png" alt="Lynn 88x31 personal badge">
+            </a>
+            <a href="https://ivie.codes" target="_blank">
+            <img src="ivie.png" alt="Ivie 88x31 personal badge">
+            </a>
+            <a href="https://3kh0.net" target="_blank">
+            <img src="temp_3kh0.png" alt="3kh0 88x31 personal badge">
+            </a>
+            <a href="https://skyfall.dev" target="_blank">
+            <img src="mahad.png" alt="Mahad 88x31 personal badge">
+            </a>
+            <a href="https://saahild.com" target="_blank">
+            <img src="neon.gif" alt="Neon 88x31 badge">
+            </a>
+            <a href="https://v1c.rocks" target="_blank">
+            <img src="vic.png" alt="Vic 88x31 badge">
+            </a>
+            <a href="https://hex4.xyz" target="_blank">
+            <img src="hex4-88x31.gif" alt="Hex4 88x31 badge">
+            </a>
+            <a href="https://sundial.city" target="_blank">
+            <img src="bunnyguy2.gif" alt="Bunnyguy 88x31 badge">
+            </a>
+            <a href="https://aconlin.com" target="_blank">
+            <img src="acon-gets-a-button-animated_360.gif" alt="Acon 88x31 badge">
+            </a>
+            <a href="https://froppii.dev" target="_blank">
+            <img src="frop_button_360.gif" alt="Froppii 88x31 badge">
+            </a>
+            <a href="https://cutiesin.tech/" target="_blank">
+            <img src="junya88x31_360.gif" alt="Junya 88x31 badge">
+            </a>
+            <a href="https://lilia.rocks/" target="_blank">
+            <img src="kittycat.gif" alt="KittyCat 88x31 badge">
+            </a>
+            <a href="https://hack.app" target="_blank">
+            <img src="nest.png" alt="Nest 88x31 personal badge">
+            </a>
+            </div>
             </div>
         </main>
     </div>
-</body>
+</body> 
 </html>
