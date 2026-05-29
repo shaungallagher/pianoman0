@@ -1,35 +1,41 @@
 (async function () {
-  const indicator = document.getElementById('slack-status-indicator');
-  const dot = indicator && indicator.querySelector('.dot');
-  const text = indicator && indicator.querySelector('.text');
-  const username = 'pianoman0';
   const endpoint = '/slack-status.php';
+  const username = 'pianoman0';
+
+  const onlineDot = document.getElementById('online-dot');
+  const indicator = document.getElementById('slack-status-indicator');
+  const dot = onlineDot || (indicator && indicator.querySelector('.dot'));
+  const text = indicator && indicator.querySelector('.text');
 
   function setLoading() {
-    indicator.className = 'loading';
-    dot.style.background = '#9e9e9e';
-    text.textContent = 'Checking Slack...';
+    if (indicator) indicator.className = 'loading';
+    if (dot) dot.style.background = '#9e9e9e';
+    if (text) text.textContent = 'Checking Slack...';
+    if (onlineDot) { onlineDot.classList.remove('online','offline'); }
   }
 
   function setOnline() {
-    indicator.className = 'online';
-    dot.style.background = '#00e676';
-    text.textContent = '@' + username + ' is online';
+    if (indicator) indicator.className = 'online';
+    if (dot) dot.style.background = '#00e676';
+    if (text) text.textContent = '@' + username + ' is online';
+    if (onlineDot) { onlineDot.classList.remove('offline'); onlineDot.classList.add('online'); }
   }
 
   function setOffline() {
-    indicator.className = 'offline';
-    dot.style.background = '#9e9e9e';
-    text.textContent = '@' + username + ' is offline';
+    if (indicator) indicator.className = 'offline';
+    if (dot) dot.style.background = '#9e9e9e';
+    if (text) text.textContent = '@' + username + ' is offline';
+    if (onlineDot) { onlineDot.classList.remove('online'); onlineDot.classList.add('offline'); }
   }
 
   function setError() {
-    indicator.className = 'offline';
-    dot.style.background = '#ff7043';
-    text.textContent = 'Status unavailable';
+    if (indicator) indicator.className = 'offline';
+    if (dot) dot.style.background = '#ff7043';
+    if (text) text.textContent = 'Status unavailable';
+    if (onlineDot) { onlineDot.classList.remove('online'); onlineDot.classList.add('offline'); }
   }
 
-  if (!indicator) return;
+  if (!dot && !indicator && !onlineDot) return;
 
   async function fetchStatus() {
     try {
