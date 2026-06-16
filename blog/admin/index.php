@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="password" name="password" autocomplete="current-password" />
       <div style="margin-top:12px"><button type="submit">Log in</button></div>
     </form>
-    <p style="margin-top:12px;color:#aaa;font-size:0.9rem">Admin panel protected by the password in the project's <strong>.env</strong> file.</p>
   </div>
 </body>
 </html>
