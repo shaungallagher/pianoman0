@@ -1,6 +1,37 @@
 <?php
 require_once '../config.php';
 
+function redact_oauth_json($raw) {
+    $rawStr = (string)$raw;
+    $arr = json_decode($rawStr, true);
+    if (json_last_error() === JSON_ERROR_NONE && is_array($arr)) {
+        $sensitive = ['access_token', 'refresh_token', 'id_token', 'token', 'refreshToken', 'id'];
+        foreach ($sensitive as $k) {
+            if (array_key_exists($k, $arr)) $arr[$k] = '[REDACTED]';
+        }
+        return json_encode($arr);
+    }
+    $clean = preg_replace('/(access_token=)[^&\s]+/i', '$1[REDACTED]', $rawStr);
+    $clean = preg_replace('/("access_token"\s*:\s*")([^"]+)(")/i', '$1[REDACTED]$3', $clean);
+    $clean = preg_replace('/("refresh_token"\s*:\s*")([^"]+)(")/i', '$1[REDACTED]$3', $clean);
+    return $clean;
+}
+
+function oauth_debug_log($label, $raw = '') {
+    if (getenv('OAUTH_DEBUG') !== '1' || strtolower(getenv('APP_ENV') ?: '') !== 'development') {
+        return;
+    }
+
+    $logFile = sys_get_temp_dir() . '/sprint_oauth_debug.log';
+    $clean = '';
+    if ($raw !== null && $raw !== '') {
+        $clean = redact_oauth_json($raw);
+    }
+
+    $entry = date('c') . " {$label}\n" . $clean . "\n\n";
+    @file_put_contents($logFile, $entry, FILE_APPEND | LOCK_EX);
+}
+
 $code = $_GET['code'] ?? null;
 $state = $_GET['state'] ?? null;
 $sessState = $_SESSION['gh_oauth_state'] ?? null;
@@ -24,7 +55,7 @@ if (!$validState) {
 }
 
 if (isset($_COOKIE['gh_oauth_state'])) {
-    $cookieDomain = isset($_SERVER['HTTP_HOST']) ? preg_replace('/:\\d+$/', '', $_SERVER['HTTP_HOST']) : '';
+    $cookieDomain = isset($_SERVER['HTTP_HOST']) ? preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST']) : '';
     if (PHP_VERSION_ID >= 70300) {
         $opts = ['expires' => time() - 3600, 'path' => '/', 'samesite' => 'Lax'];
         if ($cookieDomain !== '') $opts['domain'] = $cookieDomain;
@@ -38,9 +69,8 @@ if (getenv('OAUTH_DEBUG') === '1') {
     $host = $_SERVER['HTTP_HOST'] ?? '';
     $redir = getenv('GITHUB_REDIRECT_URI') ?: '(auto)';
     $dbg = "host={$host}\nGITHUB_REDIRECT_URI={$redir}\ncode_present=" . (!empty($code) ? '1' : '0') . "\nstate_present=" . (!empty($state) ? '1' : '0') . "\nsessState_present=" . (!empty($sessState) ? '1' : '0') . "\ncookieState_present=" . (!empty($cookieState) ? '1' : '0') . "\n";
-    @file_put_contents(__DIR__ . '/../logs/oauth_debug.log', date('c') . "\n" . $dbg . "\n", FILE_APPEND | LOCK_EX);
+    oauth_debug_log('handshake_metadata', $dbg);
 }
-
 
 $clientId = getenv('GITHUB_CLIENT_ID');
 $clientSecret = getenv('GITHUB_CLIENT_SECRET');
@@ -69,7 +99,7 @@ $resp = curl_exec($ch);
 $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if ($resp === false) {
     if (getenv('OAUTH_DEBUG') === '1') {
-        @file_put_contents(__DIR__ . '/../logs/oauth_debug.log', date('c') . "\n" . "github_token_exchange: curl_exec_failed\n" . curl_error($ch) . "\n" . "http_status=" . $httpStatus . "\n\n" , FILE_APPEND | LOCK_EX);
+        oauth_debug_log('github_token_exchange: curl_exec_failed', curl_error($ch) . "\nhttp_status=" . $httpStatus);
     }
     $_SESSION['profile_error'] = 'Failed to complete GitHub OAuth.';
     header('Location: ' . url('sprint/public/profile.php'));
@@ -79,14 +109,12 @@ $data = json_decode($resp, true);
 $accessToken = $data['access_token'] ?? null;
 if (!$accessToken) {
     if (getenv('OAUTH_DEBUG') === '1') {
-        $safeResp = substr((string)$resp, 0, 4000);
-        @file_put_contents(__DIR__ . '/../logs/oauth_debug.log', date('c') . "\n" . "github_token_exchange: no_access_token http_status=" . $httpStatus . "\n" . $safeResp . "\n\n" , FILE_APPEND | LOCK_EX);
+        oauth_debug_log('github_token_exchange: no_access_token', $resp . "\nhttp_status=" . $httpStatus);
     }
     $_SESSION['profile_error'] = 'No access token from GitHub.';
     header('Location: ' . url('sprint/public/profile.php'));
     exit;
 }
-
 
 $ch = curl_init('https://api.github.com/user');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -99,25 +127,16 @@ if (!$user || empty($user['login'])) {
     exit;
 }
 
-// Optional debug log of provider responses (enable by setting OAUTH_DEBUG=1)
 if (getenv('OAUTH_DEBUG') === '1') {
-    $dbg = substr(($resp ?? '') . "\n\n" . ($userJson ?? ''), 0, 4000);
-    @file_put_contents(__DIR__ . '/../logs/oauth_debug.log', date('c') . "\n" . $dbg . "\n\n", FILE_APPEND | LOCK_EX);
+    oauth_debug_log('provider_responses', ($resp ?? '') . "\n\n" . ($userJson ?? ''));
 }
 
 $provider = 'github';
 $provider_user_id = $user['login'];
 $avatar_url = $user['avatar_url'] ?? null;
 
-// Harden account-linking: only allow linking/sign-in when the user is
-// actively linking via an authenticated intent in this session.
-//
-// We require a session flag set by the profile “connect GitHub” flow.
-// This prevents callback handlers from turning arbitrary valid OAuth callbacks
-// into sign-in for an already-linked account.
 $intentUserId = $_SESSION['oauth_intent_user_id']['github'] ?? null;
 if (empty($intentUserId) || !is_int((int)$intentUserId)) {
-    // Clear any stale intent.
     unset($_SESSION['oauth_intent_user_id']['github']);
     $_SESSION['profile_error'] = 'Invalid GitHub OAuth linking session. Please try connecting again.';
     header('Location: ' . url('sprint/public/profile.php'));
@@ -127,8 +146,6 @@ $intentUserId = (int)$intentUserId;
 unset($_SESSION['oauth_intent_user_id']['github']);
 
 try {
-    // Upsert oauth account but bind it only to the intended user.
-    // If the provider account is already linked to another user, do not sign in.
     $stmt = $pdo->prepare('SELECT id AS acct_id, user_id FROM oauth_accounts WHERE provider=? AND provider_user_id=? LIMIT 1');
     $stmt->execute([$provider, $provider_user_id]);
     $acct = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -140,7 +157,6 @@ try {
             exit;
         }
 
-        // Update token but keep user binding.
         $stmt = $pdo->prepare('UPDATE oauth_accounts SET access_token=?, expires_at=? WHERE id=?');
         $stmt->execute([$accessToken, null, $acct['acct_id']]);
 
@@ -153,13 +169,11 @@ try {
         $stmt->execute([$intentUserId, $provider, $provider_user_id, $accessToken]);
     }
 
-    // Update avatar on the intended user.
     if (!empty($avatar_url)) {
         $upd = $pdo->prepare('UPDATE users SET github_avatar_url = ? WHERE id = ?');
         $upd->execute([$avatar_url, $intentUserId]);
     }
 
-    // Finally, sign in the intended user.
     $uStmt = $pdo->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
     $uStmt->execute([$intentUserId]);
     $uRow = $uStmt->fetch(PDO::FETCH_ASSOC);
