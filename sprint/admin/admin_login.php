@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($expected === '') {
             $error = 'Admin password is not configured. Set ADMIN_PASSWORD in your environment.';
-            if (!hash_equals($expected, $password)) {
+        } elseif (!hash_equals($expected, $password)) {
                 admin_login_rate_limit_record_attempt();
                 $error = 'Incorrect admin password.';
 
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
                     log_db_error("SECURITY: admin_login failed for user_id={$uidPart} ip={$ip}");
                 }
-            } else {
+        } else {
                 // Must be logged in to become an admin
                 $uid = current_user_id();
                 if (!$uid) {
