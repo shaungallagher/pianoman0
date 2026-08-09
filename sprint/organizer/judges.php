@@ -2,8 +2,43 @@
 require_once '../config.php';
 require_role('organizer');
 
-$event_id = $_GET['event_id'];
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+$event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
 $message = '';
+
+if ($event_id <= 0) {
+    http_response_code(400);
+    exit('Missing or invalid event_id.');
+}
+
+$current_user_id = $_SESSION['user_id'] ?? null;
+if (!$current_user_id) {
+    http_response_code(403);
+    exit('Unauthorized.');
+}
+
+try {
+    $stmt = $pdo->prepare("SELECT COALESCE(is_admin, 0) FROM users WHERE id = ?");
+    $stmt->execute([$current_user_id]);
+    $is_admin = (bool) $stmt->fetchColumn();
+
+    $stmt = $pdo->prepare("SELECT 1 FROM event_organizers WHERE user_id = ? AND event_id = ? LIMIT 1");
+    $stmt->execute([$current_user_id, $event_id]);
+    $has_assignment = (bool) $stmt->fetchColumn();
+} catch (Exception $e) {
+    if (function_exists('log_db_error')) log_db_error('Authorization check failed: ' . $e->getMessage());
+    http_response_code(500);
+    exit('Server error');
+}
+
+if (!($is_admin && $has_assignment)) {
+    http_response_code(403);
+    exit('Forbidden: you are not permitted to manage this event.');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['csrf_token'] ?? '';
@@ -12,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $email = trim($_POST['email']);
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email=?");
+        $stmt = $pdo->prepare("SELECT id, name, email FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
             try {
-                $stmt = $pdo->prepare("INSERT INTO judges (user_id, event_id) VALUES (?,?)");
+                $stmt = $pdo->prepare("INSERT INTO judges (user_id, event_id) VALUES (?, ?)");
                 $stmt->execute([$user['id'], $event_id]);
                 $message = "Judge added.";
             } catch (Exception $e) {
@@ -31,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$stmt = $pdo->prepare("
-    SELECT users.name, users.email
-    FROM judges
-    JOIN users ON users.id = judges.user_id
-    WHERE judges.event_id = ?
-");
+$stmt = $pdo->prepare(
+    "SELECT users.name, users.email
+     FROM judges
+     JOIN users ON users.id = judges.user_id
+     WHERE judges.event_id = ?"
+);
 $stmt->execute([$event_id]);
 $judges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
