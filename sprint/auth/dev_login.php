@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $host = $_SERVER['HTTP_HOST'] ?? '';
-$allowDemo = getenv('ALLOW_DEMO_LOGIN') === '1' || stripos($host, 'localhost') !== false || stripos($host, '127.0.0.1') !== false || stripos($host, 'dev.') === 0;
+$allowDemo = getenv('ALLOW_DEMO_LOGIN') === '1' || stripos($host, 'localhost') !== false || stripos($host, '127.0.0.1') !== false;
 
 if (!$allowDemo) {
     http_response_code(403);
