@@ -15,27 +15,23 @@ if ($event_id <= 0) {
     exit('Missing or invalid event_id.');
 }
 
-$current_user_id = $_SESSION['user_id'] ?? null;
+$current_user_id = current_user_id();
 if (!$current_user_id) {
     http_response_code(403);
     exit('Unauthorized.');
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT COALESCE(is_admin, 0) FROM users WHERE id = ?");
-    $stmt->execute([$current_user_id]);
-    $is_admin = (bool) $stmt->fetchColumn();
-
-    $stmt = $pdo->prepare("SELECT 1 FROM event_organizers WHERE user_id = ? AND event_id = ? LIMIT 1");
-    $stmt->execute([$current_user_id, $event_id]);
-    $has_assignment = (bool) $stmt->fetchColumn();
+    $event = get_event($pdo, $event_id);
+    $has_assignment = $event && (int)($event['created_by'] ?? 0) === (int)$current_user_id;
+    $is_admin = is_admin();
 } catch (Exception $e) {
     if (function_exists('log_db_error')) log_db_error('Authorization check failed: ' . $e->getMessage());
     http_response_code(500);
     exit('Server error');
 }
 
-if (!($is_admin && $has_assignment)) {
+if (!($is_admin || $has_assignment)) {
     http_response_code(403);
     exit('Forbidden: you are not permitted to manage this event.');
 }

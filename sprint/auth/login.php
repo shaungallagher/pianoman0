@@ -6,7 +6,7 @@ include '../includes/header.php';
 
 $clientId = getenv('HACKCLUB_CLIENT_ID');
 $host = $_SERVER['HTTP_HOST'] ?? '';
-$allowDemo = getenv('ALLOW_DEMO_LOGIN') === '1' || stripos($host, 'localhost') !== false || stripos($host, '127.0.0.1') !== false || stripos($host, 'dev.') === 0;
+$allowDemo = getenv('ALLOW_DEMO_LOGIN') === '1' || stripos($host, 'localhost') !== false || stripos($host, '127.0.0.1') !== false;
 ?>
 
 

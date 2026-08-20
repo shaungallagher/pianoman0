@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS users (
   verification_status INTEGER DEFAULT 0,
   profile TEXT,
   slack_avatar_url TEXT DEFAULT NULL,
+  github_avatar_url TEXT DEFAULT NULL,
   role TEXT DEFAULT 'participant',
 
   -- Organizer preference / home location (optional)
