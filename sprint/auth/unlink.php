@@ -3,7 +3,7 @@ require_once '../config.php';
 require_login();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
@@ -13,14 +13,14 @@ $provider = $_POST['provider'] ?? '';
 if (!validate_csrf_token($token)) {
     http_response_code(400);
     $_SESSION['profile_error'] = 'Invalid CSRF token.';
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
 $provider = trim((string)$provider);
 if ($provider === '') {
     $_SESSION['profile_error'] = 'Missing provider.';
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
@@ -38,7 +38,7 @@ try {
 
     if ($linked <= 1 && !$hasPassword) {
         $_SESSION['profile_error'] = 'Cannot unlink the only login method for your account. Add another login method first.';
-        header('Location: ' . url('/sprint/public/profile.php'));
+        header('Location: ' . url('/sprint/profile.php'));
         exit;
     }
 
@@ -68,10 +68,10 @@ try {
     }
 
     $_SESSION['profile_success'] = 'Unlinked ' . htmlspecialchars($provider) . ' account.';
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 } catch (Exception $e) {
     $_SESSION['profile_error'] = 'Unlink failed: ' . htmlspecialchars($e->getMessage());
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }

@@ -128,7 +128,7 @@ if ($hasVenue):
                         </div>
 
                         <?php if (current_user_id()): ?>
-                            <form method="post" action="<?= url('/sprint/public/refresh_github_preview.php') ?>" style="margin-top:10px;">
+                            <form method="post" action="<?= url('/sprint/refresh_github_preview.php') ?>" style="margin-top:10px;">
                                 <?= csrf_input_field() ?>
                                 <input type="hidden" name="event_id" value="<?= (int)$event_id ?>">
                                 <input type="hidden" name="submission_id" value="<?= (int)$s['id'] ?>">
@@ -138,7 +138,7 @@ if ($hasVenue):
                     </div>
                 <?php else: ?>
                     <?php if (current_user_id()): ?>
-                        <form method="post" action="<?= url('/sprint/public/refresh_github_preview.php') ?>" style="margin-top:10px;">
+                        <form method="post" action="<?= url('/sprint/refresh_github_preview.php') ?>" style="margin-top:10px;">
                             <?= csrf_input_field() ?>
                             <input type="hidden" name="event_id" value="<?= (int)$event_id ?>">
                             <input type="hidden" name="submission_id" value="<?= (int)$s['id'] ?>">

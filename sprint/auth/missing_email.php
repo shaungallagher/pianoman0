@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
             login_user($user);
             unset($_SESSION['hc_oauth_pending']);
-            header('Location: ' . url('public/index.php'));
+            header('Location: ' . url('index.php'));
             exit;
         }
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             login_user($user);
             unset($_SESSION['hc_oauth_pending']);
-            header('Location: ' . url('public/index.php'));
+            header('Location: ' . url('index.php'));
             exit;
         } catch (Exception $e) {
             http_response_code(500);

@@ -46,7 +46,7 @@ include '../includes/header.php';
         <p>Download submissions CSV</p>
     </a>
 
-    <a class="card" href="../public/announcements.php?event_id=<?= (int)$event_id ?>">
+    <a class="card" href="../announcements.php?event_id=<?= (int)$event_id ?>">
         <h2>Announcements</h2>
         <p>Post updates to participants</p>
     </a>

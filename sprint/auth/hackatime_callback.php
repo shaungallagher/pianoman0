@@ -4,7 +4,7 @@ require_once '../config.php';
 require_login();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
@@ -111,6 +111,6 @@ try {
     $_SESSION['profile_error'] = 'Failed to link Hackatime: ' . htmlspecialchars($e->getMessage());
 }
 
-header('Location: ' . url('/sprint/public/profile.php'));
+header('Location: ' . url('/sprint/profile.php'));
 exit;
 

@@ -65,7 +65,7 @@ try {
     </a>
 
 
-    <a class="card" href="../public/profile.php" style="text-decoration:none;">
+    <a class="card" href="../profile.php" style="text-decoration:none;">
         <h2>Profile</h2>
         <p>Manage linked accounts from your profile.</p>
     </a>

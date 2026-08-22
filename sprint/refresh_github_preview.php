@@ -46,7 +46,7 @@ try {
     $repoUrl = (string)($submission['repo_url'] ?? '');
     if ($repoUrl === '') {
         $_SESSION['profile_error'] = 'This submission has no repo URL to fetch from.';
-        header('Location: ' . url('/sprint/public/event.php') . '?id=' . (int)$targetEventId);
+        header('Location: ' . url('/sprint/event.php') . '?id=' . (int)$targetEventId);
         exit;
     }
 
@@ -67,7 +67,7 @@ try {
     ]);
 }
 
-header('Location: ' . url('/sprint/public/event.php') . '?id=' . (int)$targetEventId);
+header('Location: ' . url('/sprint/event.php') . '?id=' . (int)$targetEventId);
 exit;
 
 

@@ -20,7 +20,7 @@ HACKCLUB_REDIRECT_URI=https://yourhost/sprint/auth/callback.php
 
 ```bash
 php public/db_status.php
-# or open http://localhost/sprint/public/db_status.php in your browser
+# or open http://localhost/sprint/db_status.php in your browser
 ```
 
 4) If the DB is reachable but schema is missing, initialize it from `db.sql`:

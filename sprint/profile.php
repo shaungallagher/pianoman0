@@ -92,7 +92,7 @@ include '../includes/header.php';
 
         <h2>Edit profile</h2>
 
-        <form method="post" action="<?= url('/sprint/public/profile.php') ?>" class="form">
+        <form method="post" action="<?= url('/sprint/profile.php') ?>" class="form">
             <?= csrf_input_field() ?>
 
             <label for="name">Display name
@@ -109,7 +109,7 @@ include '../includes/header.php';
 
             <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:0.5rem;">
                 <button class="btn">Save</button>
-                <a class="btn" href="<?= url('/sprint/public/index.php') ?>">Back</a>
+                <a class="btn" href="<?= url('/sprint/index.php') ?>">Back</a>
             </div>
         </form>
 
@@ -266,7 +266,7 @@ if ($orgCount === 0 && (($u['role'] ?? '') !== 'organizer')):
         foreach ($attended as $e) {
             $id = $e['id'] ?? null;
             if ($id === null) continue;
-            echo '<li><a href="' . htmlspecialchars(url('/sprint/public/event.php') . '?id=' . $id) . '">' . htmlspecialchars($e['name'] ?? '') . '</a> — ' . htmlspecialchars(substr($e['description'] ?? '', 0, 140)) . '</li>';
+            echo '<li><a href="' . htmlspecialchars(url('/sprint/event.php') . '?id=' . $id) . '">' . htmlspecialchars($e['name'] ?? '') . '</a> — ' . htmlspecialchars(substr($e['description'] ?? '', 0, 140)) . '</li>';
         }
         echo '</ul>';
     }

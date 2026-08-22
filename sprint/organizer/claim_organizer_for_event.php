@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?= csrf_input_field() ?>
     <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
         <button class="btn" type="submit">Become organizer</button>
-        <a class="btn outline" href="<?= url('/sprint/public/event.php') . '?id=' . (int)$event_id ?>">Back to event</a>
+        <a class="btn outline" href="<?= url('/sprint/event.php') . '?id=' . (int)$event_id ?>">Back to event</a>
     </div>
 </form>
 
