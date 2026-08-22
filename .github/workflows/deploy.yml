@@ -23,6 +23,7 @@ jobs:
     - name: Rsync files to DreamHost
       run: |
         rsync -avz --delete \
+          --exclude='.*' \
           -e "ssh -i ~/.ssh/id_ed25519" \
           ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
 
