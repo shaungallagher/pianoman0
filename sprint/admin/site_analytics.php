@@ -12,7 +12,7 @@ $topEventsStmt = $pdo->query('SELECT e.name, COUNT(s.id) AS submissions FROM eve
 $topEvents = $topEventsStmt->fetchAll(PDO::FETCH_ASSOC);
 
 $page_title = "Analytics · Sprint";
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h1>Analytics</h1>
@@ -42,4 +42,4 @@ new Chart(ctx, {
 });
 </script>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>

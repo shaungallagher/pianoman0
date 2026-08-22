@@ -1,14 +1,14 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
+require_once 'functions.php';
 
 $page_title = "Admin Login · Sprint";
-include '../includes/header.php';
+include 'header.php';
 
 $error = null;
 $success = null;
 
-require_once '../includes/auth.php';
+require_once 'auth.php';
 
 // Skip login if the user is already an admin
 if (is_admin()) {
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $uid = current_user_id();
                 if (!$uid) {
                     $success = 'Login required before becoming admin.';
-                    header('Location: ../auth/login.php');
+                    header('Location: login.php');
                     exit;
                 }
 
@@ -140,5 +140,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </section>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 

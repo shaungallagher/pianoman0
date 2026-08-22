@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
+require_once 'functions.php';
 
 require_login();
 
@@ -35,7 +35,7 @@ if (is_organizer()) {
 }
 
 $page_title = "Become Organizer · Sprint";
-include '../includes/header.php';
+include 'header.php';
 
 $error = null;
 $success = null;
@@ -84,5 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </form>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 

@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
+require_once 'functions.php';
 require_login();
 
 $event_id = $_GET['event_id'];
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Teams · Sprint";
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h1>Teams for <?= htmlspecialchars($event['name']) ?></h1>
@@ -62,4 +62,4 @@ include '../includes/header.php';
 <?php endforeach; ?>
 </ul>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
