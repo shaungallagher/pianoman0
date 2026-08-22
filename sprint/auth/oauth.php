@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 
 $clientId = getenv('HACKCLUB_CLIENT_ID');
 if (!$clientId) {

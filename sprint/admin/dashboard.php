@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_once '../includes/functions.php';
 require_once '../includes/roles.php';
 
@@ -65,7 +65,7 @@ try {
     </a>
 
 
-    <a class="card" href="../profile.php" style="text-decoration:none;">
+    <a class="card" href="profile.php" style="text-decoration:none;">
         <h2>Profile</h2>
         <p>Manage linked accounts from your profile.</p>
     </a>

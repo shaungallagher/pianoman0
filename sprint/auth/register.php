@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 
 $page_title = "Register · Sprint";
 include '../includes/header.php';

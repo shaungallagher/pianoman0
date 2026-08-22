@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_once '../includes/functions.php';
 require_once '../includes/judge_functions.php';
 require_role('judge');

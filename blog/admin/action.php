@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../includes.php';
+require_once __DIR__ . '/includes.php';
 if (empty($_SESSION['blog_admin'])) {
     header('Location: index.php');
     exit;

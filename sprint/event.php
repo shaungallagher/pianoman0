@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_once '../includes/functions.php';
 
 $event_id = $_GET['id'] ?? null;
