@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once '../includes/functions.php';
 require_login();
 
 $eventId = intval($_POST['event_id'] ?? $_GET['event_id'] ?? 0);

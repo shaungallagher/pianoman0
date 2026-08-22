@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Report Incident · Sprint";
-include 'header.php';
+include '../includes/header.php';
 ?>
 
 <div class="incident-header">
@@ -105,4 +105,4 @@ include 'header.php';
     <button class="btn">Report</button>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

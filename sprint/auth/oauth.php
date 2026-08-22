@@ -51,7 +51,7 @@ if ($configuredRedirect) {
     $currentHost = $_SERVER['HTTP_HOST'] ?? null;
     if ($cfgHost && $currentHost && strcasecmp($cfgHost, $currentHost) !== 0) {
         $page_title = "Login · Sprint";
-        include 'header.php';
+        include '../includes/header.php';
         ?>
         <h1>Proceed to Hack Club</h1>
         <p>The OAuth client is configured to redirect to <strong><?= htmlspecialchars($configuredRedirect) ?></strong>.</p>
@@ -60,7 +60,7 @@ if ($configuredRedirect) {
             <a class="btn" href="<?= htmlspecialchars($authUrl) ?>">Continue to Hack Club</a>
         </p>
         <?php
-        include 'footer.php';
+        include '../includes/footer.php';
         exit;
     }
 }

@@ -1,12 +1,12 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
-require_once 'roles.php';
+require_once '../includes/functions.php';
+require_once '../includes/roles.php';
 
 require_role('admin');
 
 $page_title = "Admin Dashboard · Sprint";
-include 'header.php';
+include '../includes/header.php';
 
 try {
     $userCount = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
@@ -79,16 +79,16 @@ try {
 
     <ul class="list" style="margin-top:0.75rem;">
         <li>
-            <a href="oauth_admin.php">OAuth Accounts</a>
+            <a href="../admin/oauth_admin.php">OAuth Accounts</a>
         </li>
         <li>
-            <a href="logs.php">Logs</a>
+            <a href="../admin/logs.php">Logs</a>
         </li>
         <li>
-            <a href="db_status.php">DB Status</a>
+            <a href="../admin/db_status.php">DB Status</a>
         </li>
     </ul>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 

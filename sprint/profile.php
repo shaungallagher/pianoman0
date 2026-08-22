@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'roles.php';
+require_once '../includes/roles.php';
 require_login();
 
 // Defensive: profile can be hit after OAuth flows where session shape may be incomplete.
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $u = current_user() ?? [];
 
 $page_title = 'Profile · Sprint';
-include 'header.php';
+include '../includes/header.php';
 ?>
 
 <?php
@@ -315,5 +315,5 @@ if ($orgCount === 0 && (($u['role'] ?? '') !== 'organizer')):
     <?php endif; ?>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 

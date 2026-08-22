@@ -67,7 +67,7 @@ if (!$validState) {
     if (getenv('OAUTH_DEBUG') === '1') {
         $dbg = "session_hc=" . ($_SESSION['hc_oauth_state'] ?? '[none]') . " cookie_hc=" . ($cookieState ?? '[none]') . " session_gh=" . ($ghSessState ?? '[none]') . " cookie_gh=" . ($ghCookieState ?? '[none]');
         echo "<pre style=\"white-space:pre-wrap;background:#f8f9fa;padding:8px;border-radius:6px;margin-top:12px;\">" . htmlspecialchars($dbg) . "</pre>";
-        @file_put_contents(__DIR__ . '/oauth_debug.log', date('c') . " hc_state_check: " . $dbg . "\n", FILE_APPEND | LOCK_EX);
+        @file_put_contents(__DIR__ . '/../logs/oauth_debug.log', date('c') . " hc_state_check: " . $dbg . "\n", FILE_APPEND | LOCK_EX);
     }
     exit;
 }
@@ -149,7 +149,7 @@ if ($meRes === false) {
 // Optional debug log of provider /me response (enable by setting OAUTH_DEBUG=1 in .env)
 if (getenv('OAUTH_DEBUG') === '1') {
     $dbg = substr($meRes, 0, 4000);
-    @file_put_contents(__DIR__ . '/oauth_debug.log', date('c') . "\n" . $dbg . "\n\n", FILE_APPEND | LOCK_EX);
+    @file_put_contents(__DIR__ . '/../logs/oauth_debug.log', date('c') . "\n" . $dbg . "\n\n", FILE_APPEND | LOCK_EX);
 }
 
 $me = json_decode($meRes, true);

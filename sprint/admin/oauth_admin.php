@@ -3,7 +3,7 @@ require_once 'config.php';
 require_role('admin');
 
 $page_title = "OAuth Accounts · Sprint";
-include 'header.php';
+include '../includes/header.php';
 
 try {
     $stmt = $pdo->query("SELECT oa.*, u.email AS user_email, u.name AS user_name FROM oauth_accounts oa JOIN users u ON oa.user_id = u.id ORDER BY oa.created_at DESC");
@@ -43,5 +43,5 @@ function mask($s) {
     </tbody>
 </table>
 
-<?php include 'footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 
