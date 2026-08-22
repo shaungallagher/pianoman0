@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
+require_once 'includes/functions.php';
 
 $event_id = (int)($_GET['event_id'] ?? 0);
 $event = get_event($pdo, $event_id);
@@ -35,7 +35,7 @@ if (!is_array($rows)) {
 }
 
 $page_title = "Leaderboard · Sprint";
-include '../includes/header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Leaderboard — <?= htmlspecialchars($event['name']) ?></h1>
@@ -62,4 +62,4 @@ include '../includes/header.php';
     </tbody>
 </table>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

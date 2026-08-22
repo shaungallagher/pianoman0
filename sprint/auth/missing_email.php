@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Provide email · Sprint";
-include '../includes/header.php';
+include 'includes/header.php';
 ?>
 
 <h1>We need your email</h1>
@@ -118,4 +118,4 @@ include '../includes/header.php';
     </div>
 </form>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

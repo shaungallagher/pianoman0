@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Create Event · Sprint";
-include '../includes/header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Create Event</h1>
@@ -163,4 +163,4 @@ include '../includes/header.php';
 </form>
 
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

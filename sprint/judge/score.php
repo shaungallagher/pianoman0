@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
-require_once '../includes/judge_functions.php';
+require_once 'includes/functions.php';
+require_once 'includes/judge_functions.php';
 require_login();
 
 $submission_id = intval($_GET['id'] ?? 0);
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 $page_title = "Score Submission · Sprint";
-include '../includes/header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Score: <?= htmlspecialchars($submission['title']) ?></h1>
@@ -115,4 +115,4 @@ include '../includes/header.php';
     <button class="btn">Submit Scores</button>
 </form>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
