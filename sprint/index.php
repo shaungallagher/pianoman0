@@ -66,10 +66,10 @@ include '../includes/header.php';
             <a class="btn" href="<?= url('sprint/organizer/dashboard.php') ?>">Organizer Dashboard</a>
         <?php elseif (is_judge()): ?>
             <a class="btn cta lg" href="<?= url('sprint/judge/dashboard.php') ?>">Judge Dashboard</a>
-            <a class="btn" href="<?= url('sprint/public/index.php') ?>">View Assigned Events</a>
+            <a class="btn" href="<?= url('sprint/index.php') ?>">View Assigned Events</a>
         <?php else: ?>
-            <a class="btn cta lg" href="<?= url('sprint/public/teams.php') ?>">Join a Team</a>
-            <a class="btn" href="<?= url('sprint/public/index.php') ?>">Browse Events</a>
+            <a class="btn cta lg" href="<?= url('sprint/teams.php') ?>">Join a Team</a>
+            <a class="btn" href="<?= url('sprint/index.php') ?>">Browse Events</a>
         <?php endif; ?>
     </div>
 </section>
@@ -82,7 +82,7 @@ include '../includes/header.php';
         <h3><?= htmlspecialchars($e['name']) ?></h3>
         <p><?= htmlspecialchars(substr($e['description'], 0, 140)) ?>...</p>
         <p class="caption"><?= htmlspecialchars($e['start_time']) ?> → <?= htmlspecialchars($e['end_time']) ?></p>
-        <a class="btn" href="<?= url('/sprint/public/event.php') ?>?id=<?= (int)$e['id'] ?>">View Event</a>
+        <a class="btn" href="<?= url('/sprint/event.php') ?>?id=<?= (int)$e['id'] ?>">View Event</a>
     </div>
 <?php endforeach; ?>
 </div>

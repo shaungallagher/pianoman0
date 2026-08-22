@@ -38,7 +38,7 @@ $apiBase = rtrim(getenv('HACKATIME_API_BASE') ?: 'https://hackatime.hackclub.com
 
             <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
                 <button class="btn" type="submit">Connect</button>
-                <a class="btn outline" href="<?= url('/sprint/public/profile.php') ?>" style="display:inline-block;">Cancel</a>
+                <a class="btn outline" href="<?= url('/sprint/profile.php') ?>" style="display:inline-block;">Cancel</a>
             </div>
         </form>
 

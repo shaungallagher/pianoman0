@@ -50,7 +50,7 @@ if (!$validState) {
     }
 
     $_SESSION['profile_error'] = 'Invalid GitHub OAuth state. Please try again.';
-    header('Location: ' . url('sprint/public/profile.php'));
+    header('Location: ' . url('sprint/profile.php'));
     exit;
 }
 
@@ -76,7 +76,7 @@ $clientId = getenv('GITHUB_CLIENT_ID');
 $clientSecret = getenv('GITHUB_CLIENT_SECRET');
 if (!$clientId || !$clientSecret) {
     $_SESSION['profile_error'] = 'GitHub OAuth is not fully configured, please contact @PianoMan0';
-    header('Location: ' . url('sprint/public/profile.php'));
+    header('Location: ' . url('sprint/profile.php'));
     exit;
 }
 
@@ -102,7 +102,7 @@ if ($resp === false) {
         oauth_debug_log('github_token_exchange: curl_exec_failed', curl_error($ch) . "\nhttp_status=" . $httpStatus);
     }
     $_SESSION['profile_error'] = 'Failed to complete GitHub OAuth.';
-    header('Location: ' . url('sprint/public/profile.php'));
+    header('Location: ' . url('sprint/profile.php'));
     exit;
 }
 $data = json_decode($resp, true);
@@ -112,7 +112,7 @@ if (!$accessToken) {
         oauth_debug_log('github_token_exchange: no_access_token', $resp . "\nhttp_status=" . $httpStatus);
     }
     $_SESSION['profile_error'] = 'No access token from GitHub.';
-    header('Location: ' . url('sprint/public/profile.php'));
+    header('Location: ' . url('sprint/profile.php'));
     exit;
 }
 
@@ -123,7 +123,7 @@ $userJson = curl_exec($ch);
 $user = json_decode($userJson, true);
 if (!$user || empty($user['login'])) {
     $_SESSION['profile_error'] = 'Failed to fetch GitHub user data.';
-    header('Location: ' . url('sprint/public/profile.php'));
+    header('Location: ' . url('sprint/profile.php'));
     exit;
 }
 
@@ -139,7 +139,7 @@ $intentUserId = $_SESSION['oauth_intent_user_id']['github'] ?? null;
 if (empty($intentUserId) || !is_int((int)$intentUserId)) {
     unset($_SESSION['oauth_intent_user_id']['github']);
     $_SESSION['profile_error'] = 'Invalid GitHub OAuth linking session. Please try connecting again.';
-    header('Location: ' . url('sprint/public/profile.php'));
+    header('Location: ' . url('sprint/profile.php'));
     exit;
 }
 $intentUserId = (int)$intentUserId;
@@ -153,7 +153,7 @@ try {
     if ($acct) {
         if (!empty($acct['user_id']) && (int)$acct['user_id'] !== $intentUserId) {
             $_SESSION['profile_error'] = 'This GitHub account is already linked to another user.';
-            header('Location: ' . url('sprint/public/profile.php'));
+            header('Location: ' . url('sprint/profile.php'));
             exit;
         }
 
@@ -187,5 +187,5 @@ try {
     $_SESSION['profile_error'] = 'Failed to link GitHub: ' . $e->getMessage();
 }
 
-header('Location: ' . url('sprint/public/profile.php'));
+header('Location: ' . url('sprint/profile.php'));
 exit;

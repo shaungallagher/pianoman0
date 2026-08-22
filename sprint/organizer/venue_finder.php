@@ -229,7 +229,7 @@ include '../includes/header.php';
                     <div class="meta">Capacity: <?= htmlspecialchars((string)$e['venue_capacity']) ?></div>
                 <?php endif; ?>
 
-                <a class="btn" href="<?= url('/sprint/public/event.php') ?>?id=<?= (int)$e['id'] ?>" style="margin-top:12px;">View Event</a>
+                <a class="btn" href="<?= url('/sprint/event.php') ?>?id=<?= (int)$e['id'] ?>" style="margin-top:12px;">View Event</a>
             </div>
         <?php endforeach; ?>
     </div>

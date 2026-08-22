@@ -12,7 +12,7 @@ if ($code && $state) {
 }
 if (!$validState) {
     $_SESSION['profile_error'] = 'Invalid Slack OAuth state.';
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
@@ -25,7 +25,7 @@ $clientId = getenv('SLACK_CLIENT_ID');
 $clientSecret = getenv('SLACK_CLIENT_SECRET');
 if (!$clientId || !$clientSecret) {
     $_SESSION['profile_error'] = 'Slack OAuth is not working right now, please contact @PianoMan0';
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
@@ -46,13 +46,13 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
 $resp = curl_exec($ch);
 if ($resp === false) {
     $_SESSION['profile_error'] = 'Failed to complete Slack OAuth.';
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 $data = json_decode($resp, true);
 if (empty($data) || empty($data['ok'])) {
     $_SESSION['profile_error'] = 'Slack OAuth failed: ' . ($data['error'] ?? 'unknown');
-    header('Location: ' . url('/sprint/public/profile.php'));
+    header('Location: ' . url('/sprint/profile.php'));
     exit;
 }
 
@@ -169,5 +169,5 @@ try {
     $_SESSION['profile_error'] = 'Failed to process Slack OAuth: ' . $e->getMessage();
 }
 
-header('Location: ' . url('/sprint/public/profile.php'));
+header('Location: ' . url('/sprint/profile.php'));
 exit;

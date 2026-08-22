@@ -34,7 +34,7 @@ function abort_page(string $message, int $status = 400): void {
         <main>
             <h1><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></h1>
             <p><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></p>
-            <p><a href="<?= htmlspecialchars(url('/sprint/public/index.php'), ENT_QUOTES, 'UTF-8') ?>">Return to Sprint</a></p>
+            <p><a href="<?= htmlspecialchars(url('/sprint/index.php'), ENT_QUOTES, 'UTF-8') ?>">Return to Sprint</a></p>
         </main>
     </body>
     </html>

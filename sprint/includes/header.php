@@ -28,7 +28,7 @@ if (!empty($maintenance_mode) && !(function_exists('current_user') && function_e
 <body>
 <header class="topbar fade-in" role="banner">
 
-    <div class="logo"><a href="<?= url('/sprint/public/index.php') ?>">Sprint</a></div>
+    <div class="logo"><a href="<?= url('/sprint/index.php') ?>">Sprint</a></div>
 
     <nav class="nav">
         <input id="event-search" type="search" placeholder="Search events…" aria-label="Search events" />
@@ -61,8 +61,8 @@ if (!empty($maintenance_mode) && !(function_exists('current_user') && function_e
                     <small style="opacity:0.85;display:block;line-height:1;"><?= htmlspecialchars(current_user()['email']) ?></small>
                 </span>
             </span>
-            <a href="<?= url('/sprint/public/profile.php') ?>">Profile</a>
-            <a href="<?= url('/sprint/public/report_incident.php') ?>">Report</a>
+            <a href="<?= url('/sprint/profile.php') ?>">Profile</a>
+            <a href="<?= url('/sprint/report_incident.php') ?>">Report</a>
             <a href="<?= url('/sprint/auth/logout.php') ?>">Logout</a>
         <?php else: ?>
             <a href="<?= url('/sprint/auth/login.php') ?>">Login</a>

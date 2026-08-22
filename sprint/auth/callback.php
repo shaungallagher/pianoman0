@@ -58,7 +58,7 @@ if (!$validState) {
 
     http_response_code(400);
     $loginUrl = url('auth/login.php');
-    $profileUrl = url('public/profile.php');
+    $profileUrl = url('profile.php');
     $loginUrlEsc = htmlspecialchars($loginUrl);
     $profileUrlEsc = htmlspecialchars($profileUrl);
     echo "<h1>Invalid OAuth state</h1>";
@@ -210,7 +210,7 @@ if (!empty($db_connection_failed)) {
         'role' => 'participant'
     ];
     login_user($user);
-    header('Location: ' . url('/sprint/public/index.php'));
+    header('Location: ' . url('/sprint/index.php'));
     exit;
 }
 
@@ -303,7 +303,7 @@ try {
 
     // Log user in
     login_user($user);
-    header('Location: ' . url('/sprint/public/index.php'));
+    header('Location: ' . url('/sprint/index.php'));
     exit;
 } catch (Exception $e) {
     http_response_code(500);
