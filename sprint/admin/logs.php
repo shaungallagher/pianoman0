@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_role('admin');
 
 $logFile = __DIR__ . '/../logs/db_errors.log';

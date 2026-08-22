@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_once '../includes/functions.php';
 require_role('organizer');
 
@@ -46,7 +46,7 @@ include '../includes/header.php';
         <p>Download submissions CSV</p>
     </a>
 
-    <a class="card" href="../announcements.php?event_id=<?= (int)$event_id ?>">
+    <a class="card" href="announcements.php?event_id=<?= (int)$event_id ?>">
         <h2>Announcements</h2>
         <p>Post updates to participants</p>
     </a>

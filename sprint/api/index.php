@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/config.php';
 
 // JSON API for public data. Usage examples:
 // GET /api/index.php?q=events

@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_once '../includes/functions.php';
 
 $cacheDir = __DIR__ . '/../data/cache';

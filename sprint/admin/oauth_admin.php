@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 require_role('admin');
 
 $page_title = "OAuth Accounts · Sprint";

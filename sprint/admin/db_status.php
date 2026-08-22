@@ -1,6 +1,6 @@
 <?php
 // Admin-only DB connectivity checker.
-require_once '../config.php';
+require_once 'config.php';
 require_role('admin');
 
 $root = dirname(__DIR__);

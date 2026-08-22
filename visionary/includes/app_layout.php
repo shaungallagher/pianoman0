@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../auth.php';
+require_once __DIR__ . '/auth.php';
 
 function app_nav_links($user) {
     $links = [

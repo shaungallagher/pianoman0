@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once 'config.php';
 
 $code = $_GET['code'] ?? null;
 $state = $_GET['state'] ?? null;
