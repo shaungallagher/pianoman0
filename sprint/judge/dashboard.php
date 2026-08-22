@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
-require_once '../includes/judge_functions.php';
+require_once 'functions.php';
+require_once 'judge_functions.php';
 require_role('judge');
 
 $judge_id = current_user_id();
@@ -16,7 +16,7 @@ $stmt->execute([$judge_id]);
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $page_title = "Judge Dashboard · Sprint";
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h1>Judge Dashboard</h1>
@@ -30,4 +30,4 @@ include '../includes/header.php';
 <?php endforeach; ?>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>

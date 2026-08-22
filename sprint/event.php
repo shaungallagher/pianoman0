@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once '../includes/functions.php';
+require_once 'functions.php';
 
 $event_id = $_GET['id'] ?? null;
 $event = get_event($pdo, $event_id);
@@ -14,7 +14,7 @@ $submissions = get_event_submissions($pdo, $event_id);
 $announcements = get_event_announcements($pdo, $event_id);
 
 $page_title = $event['name'] . " · Sprint";
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h1><?= htmlspecialchars($event['name']) ?></h1>
@@ -160,5 +160,5 @@ if ($hasVenue):
 <?php endforeach; ?>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 

@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 $page_title = "Login · Sprint";
-include '../includes/header.php';
+include 'header.php';
 
 $clientId = getenv('HACKCLUB_CLIENT_ID');
 $host = $_SERVER['HTTP_HOST'] ?? '';
@@ -52,5 +52,5 @@ $allowDemo = getenv('ALLOW_DEMO_LOGIN') === '1' || stripos($host, 'localhost') !
     </div>
 </section>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 

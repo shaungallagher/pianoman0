@@ -43,7 +43,7 @@ try {
 }
 
 $page_title = "DB Status · Sprint";
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h1>Database status</h1>
@@ -65,5 +65,5 @@ include '../includes/header.php';
   <pre>php scripts/init_db.php</pre>
 <?php endif; ?>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 
