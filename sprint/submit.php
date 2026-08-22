@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once 'includes/functions.php';
 require_login();
 
 $event_id = intval($_GET['event_id'] ?? 0);
@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Submit · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Submit to <?= htmlspecialchars($event['name']) ?></h1>
@@ -175,4 +175,4 @@ include 'header.php';
     <button class="btn">Submit</button>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

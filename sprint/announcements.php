@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once 'includes/functions.php';
 require_role('organizer');
 
 $event_id = $_GET['event_id'];
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Announcements · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Post Announcement</h1>
@@ -43,4 +43,4 @@ include 'header.php';
     <button class="btn">Post</button>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

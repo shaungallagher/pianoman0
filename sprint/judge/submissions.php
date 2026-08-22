@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
-require_once 'judge_functions.php';
+require_once 'includes/functions.php';
+require_once 'includes/judge_functions.php';
 
 require_login();
 
@@ -24,7 +24,7 @@ if (($event['judging_mode'] ?? 'judges') === 'judges') {
 $subs = get_event_submissions($pdo, $event_id);
 
 $page_title = "Submissions · " . ($event['name'] ?? 'Event');
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Submissions for <?= htmlspecialchars($event['name']) ?></h1>
@@ -44,4 +44,4 @@ include 'header.php';
     </div>
 <?php endif; ?>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

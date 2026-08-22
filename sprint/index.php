@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once 'includes/functions.php';
 
 $cacheDir = __DIR__ . '/../data/cache';
 if (!is_dir($cacheDir)) @mkdir($cacheDir, 0755, true);
@@ -22,7 +22,7 @@ if (!is_array($events)) {
 $page_title = "Sprint — Hackathons";
 
 
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <section class="hero container">
@@ -87,4 +87,4 @@ include 'header.php';
 <?php endforeach; ?>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

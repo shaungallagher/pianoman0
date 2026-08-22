@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 $page_title = "Register · Sprint";
-include 'header.php';
+include 'includes/header.php';
 
 $clientId = getenv('HACKCLUB_CLIENT_ID');
 ?>
@@ -16,4 +16,4 @@ $clientId = getenv('HACKCLUB_CLIENT_ID');
     <p><a href="<?= url('/sprint/auth/login.php') ?>">Back to login</a></p>
 <?php endif; ?>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

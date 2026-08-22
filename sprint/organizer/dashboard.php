@@ -1,12 +1,12 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once 'includes/functions.php';
 require_role('organizer');
 
 $events = get_events($pdo);
 $page_title = "Organizer Dashboard · Sprint";
 
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Organizer Dashboard</h1>
@@ -36,4 +36,4 @@ include 'header.php';
     <?php endforeach; ?>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once 'includes/functions.php';
 require_login();
 
 $id = intval($_GET['id'] ?? 0);
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Edit Submission · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Edit Submission</h1>
@@ -159,4 +159,4 @@ include 'header.php';
     <button class="btn">Save</button>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

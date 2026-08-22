@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';
+require_once 'includes/functions.php';
 require_role('organizer');
 
 $user = current_user();
@@ -118,7 +118,7 @@ $radius_km = $user['preferred_venue_radius_km'] ?? '';
 $min_capacity = $user['preferred_min_venue_capacity'] ?? '';
 
 $page_title = 'Venue Preferences · Sprint';
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Venue Preferences</h1>
@@ -170,4 +170,4 @@ include 'header.php';
     Tip: If you enter latitude/longitude, Sprint can sort by distance. If you only enter city/state/country, Sprint falls back to location text matching.
 </p>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

@@ -31,7 +31,7 @@ $stmt->execute([$event_id]);
 $prizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $page_title = "Manage Prizes · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Manage Prizes</h1>
@@ -63,4 +63,4 @@ include 'header.php';
 <?php endforeach; ?>
 </ul>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

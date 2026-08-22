@@ -2,7 +2,7 @@
 require_once 'config.php';
 require_role('admin');
 
-$logFile = __DIR__ . '/db_errors.log';
+$logFile = __DIR__ . '/logs/db_errors.log';
 $cleared = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['csrf_token'] ?? '';
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $contents = file_exists($logFile) ? file_get_contents($logFile) : '';
 
 $page_title = "Logs · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Application Logs</h1>
@@ -33,5 +33,5 @@ include 'header.php';
 <h2>db_errors.log</h2>
 <pre class="card sunken" style="white-space:pre-wrap;max-height:400px;overflow:auto;"><?= htmlspecialchars($contents) ?></pre>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
 

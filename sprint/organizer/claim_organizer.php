@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Claim Organizer · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Claim Organizer Role</h1>
@@ -59,4 +59,4 @@ include 'header.php';
     <button class="btn">Claim Organizer Role</button>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

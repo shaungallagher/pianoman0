@@ -49,6 +49,6 @@ $apiBase = rtrim(getenv('HACKATIME_API_BASE') ?: 'https://hackatime.hackclub.com
 </section>
 
 <?php
-include 'footer.php';
+include 'includes/footer.php';
 
 

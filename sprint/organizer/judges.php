@@ -72,7 +72,7 @@ $stmt->execute([$event_id]);
 $judges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $page_title = "Manage Judges · Sprint";
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <h1>Manage Judges</h1>
@@ -96,4 +96,4 @@ include 'header.php';
 <?php endforeach; ?>
 </ul>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
