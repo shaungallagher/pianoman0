@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'includes/functions.php';
+require_once '../includes/functions.php';
 require_role('organizer');
 
 $event_id = (int)($_GET['id'] ?? 0);
@@ -18,7 +18,7 @@ if (is_dir($cacheDir)) {
 if (!$event) abort_page('Event not found', 404);
 
 $page_title = "Manage Event · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Manage <?= htmlspecialchars($event['name']) ?></h1>
@@ -52,4 +52,4 @@ include 'includes/header.php';
     </a>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

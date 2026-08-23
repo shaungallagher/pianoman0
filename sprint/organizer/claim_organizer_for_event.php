@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'includes/functions.php';
+require_once '../includes/functions.php';
 
 require_login();
 
@@ -28,14 +28,14 @@ if (!$event) {
     abort_page('Event not found', 404);
 }
 
-// If already organizer/admin, just go to organizer dashboard
+// If already ../organizer/admin, just go to organizer dashboard
 if (is_organizer()) {
     header('Location: dashboard.php');
     exit;
 }
 
 $page_title = "Become Organizer · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 
 $error = null;
 $success = null;
@@ -84,5 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </form>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 

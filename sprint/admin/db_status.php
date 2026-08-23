@@ -43,7 +43,7 @@ try {
 }
 
 $page_title = "DB Status · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Database status</h1>
@@ -60,10 +60,10 @@ include 'includes/header.php';
   <p style="color:red;font-weight:bold;">Connection failed.</p>
   <h2>Error</h2>
   <pre><?= htmlspecialchars($err) ?></pre>
-  <p>Check <code>logs/db_errors.log</code> for details.</p>
+  <p>Check <code>../logs/db_errors.log</code> for details.</p>
   <p>If the database exists but schema is missing, initialize it from <code>db.sql</code> using the included CLI script:</p>
-  <pre>php scripts/init_db.php</pre>
+  <pre>php ../scripts/init_db.php</pre>
 <?php endif; ?>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 

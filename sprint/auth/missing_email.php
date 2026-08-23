@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 if (empty($_SESSION['hc_oauth_pending'])) {
-    header('Location: ' . url('auth/login.php'));
+    header('Location: ' . url('../auth/login.php'));
     exit;
 }
 
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Provide email · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>We need your email</h1>
@@ -106,7 +106,7 @@ include 'includes/header.php';
 
 <p>Hack Club Auth did not provide your email address. Please enter the email you'd like to use for your Sprint account.</p>
 
-<form method="post" action="<?= url('auth/missing_email.php') ?>">
+<form method="post" action="<?= url('../auth/missing_email.php') ?>">
     <?= csrf_input_field() ?>
     <div>
         <label for="email">Email</label>
@@ -114,8 +114,8 @@ include 'includes/header.php';
     </div>
     <div style="margin-top:8px;">
         <button class="btn">Continue</button>
-        <a class="btn" href="<?= url('auth/login.php') ?>">Cancel</a>
+        <a class="btn" href="<?= url('../auth/login.php') ?>">Cancel</a>
     </div>
 </form>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

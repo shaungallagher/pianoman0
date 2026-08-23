@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (function_exists('log_db_error')) log_db_error('Slack notify failed: ' . $notifyEx->getMessage());
                 }
 
-                header("Location: " . url('organizer/dashboard.php'));
+                header("Location: " . url('../organizer/dashboard.php'));
                 exit;
             } catch (Exception $e) {
                 $err = $e->getMessage();
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             if (function_exists('log_db_error')) log_db_error('Slack notify failed: ' . $notifyEx->getMessage());
                         }
 
-                        header("Location: " . url('organizer/dashboard.php'));
+                        header("Location: " . url('../organizer/dashboard.php'));
                         exit;
                     } catch (Exception $e2) {
                         if (function_exists('log_db_error')) log_db_error("Create event failed after fallback: " . $e2->getMessage());
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = "Create Event · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Create Event</h1>
@@ -163,4 +163,4 @@ include 'includes/header.php';
 </form>
 
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

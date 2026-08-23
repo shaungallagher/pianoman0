@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ' . url('auth/login.php'));
+    header('Location: ' . url('../auth/login.php'));
     exit;
 }
 

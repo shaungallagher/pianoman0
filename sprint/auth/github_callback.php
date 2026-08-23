@@ -45,7 +45,7 @@ if (!$validState) {
     $hcSessState = $_SESSION['hc_oauth_state'] ?? null;
     $hcCookieState = $_COOKIE['hc_oauth_state'] ?? null;
     if (($hcSessState && hash_equals($hcSessState, $state)) || ($hcCookieState && hash_equals($hcCookieState, $state))) {
-        header('Location: ' . url('auth/callback.php') . '?code=' . urlencode($code) . '&state=' . urlencode($state));
+        header('Location: ' . url('../auth/callback.php') . '?code=' . urlencode($code) . '&state=' . urlencode($state));
         exit;
     }
 
@@ -90,7 +90,7 @@ $post = http_build_query([
     'state' => $state,
 ]);
 
-$ch = curl_init('https://github.com/login/oauth/access_token');
+$ch = curl_init('https://github.com/login/o../auth/access_token');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);

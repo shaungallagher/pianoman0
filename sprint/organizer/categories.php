@@ -31,7 +31,7 @@ $stmt->execute([$event_id]);
 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $page_title = "Judging Categories · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Judging Categories</h1>
@@ -63,4 +63,4 @@ include 'includes/header.php';
 <?php endforeach; ?>
 </ul>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

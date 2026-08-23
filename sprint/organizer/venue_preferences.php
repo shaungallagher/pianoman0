@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'includes/functions.php';
+require_once '../includes/functions.php';
 require_role('organizer');
 
 $user = current_user();
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (!empty($missingCols)) {
-                $error = 'Preferences could not be saved because your database schema is missing columns: ' . htmlspecialchars(implode(', ', $missingCols)) . '. Run `php scripts/migrate_add_venue_search.php` (or re-init the DB).';
+                $error = 'Preferences could not be saved because your database schema is missing columns: ' . htmlspecialchars(implode(', ', $missingCols)) . '. Run `php ../scripts/migrate_add_venue_search.php` (or re-init the DB).';
             } else {
                 $stmt = $pdo->prepare(
                     "UPDATE users SET 
@@ -118,7 +118,7 @@ $radius_km = $user['preferred_venue_radius_km'] ?? '';
 $min_capacity = $user['preferred_min_venue_capacity'] ?? '';
 
 $page_title = 'Venue Preferences · Sprint';
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Venue Preferences</h1>
@@ -170,4 +170,4 @@ include 'includes/header.php';
     Tip: If you enter latitude/longitude, Sprint can sort by distance. If you only enter city/state/country, Sprint falls back to location text matching.
 </p>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

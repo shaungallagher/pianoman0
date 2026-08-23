@@ -8,7 +8,7 @@ if (!$clientId) {
     exit;
 }
 
-$redirectUri = getenv('HACKCLUB_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('auth/callback.php'));
+$redirectUri = getenv('HACKCLUB_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('../auth/callback.php'));
 
 try {
     $state = bin2hex(random_bytes(16));
@@ -42,7 +42,7 @@ $params = [
     'state' => $state,
 ];
 
-$authUrl = 'https://auth.hackclub.com/oauth/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+$authUrl = 'https://auth.hackclub.com/o../auth/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
 
 $configuredRedirect = getenv('HACKCLUB_REDIRECT_URI');
 if ($configuredRedirect) {
@@ -51,7 +51,7 @@ if ($configuredRedirect) {
     $currentHost = $_SERVER['HTTP_HOST'] ?? null;
     if ($cfgHost && $currentHost && strcasecmp($cfgHost, $currentHost) !== 0) {
         $page_title = "Login · Sprint";
-        include 'includes/header.php';
+        include '../includes/header.php';
         ?>
         <h1>Proceed to Hack Club</h1>
         <p>The OAuth client is configured to redirect to <strong><?= htmlspecialchars($configuredRedirect) ?></strong>.</p>
@@ -60,7 +60,7 @@ if ($configuredRedirect) {
             <a class="btn" href="<?= htmlspecialchars($authUrl) ?>">Continue to Hack Club</a>
         </p>
         <?php
-        include 'includes/footer.php';
+        include '../includes/footer.php';
         exit;
     }
 }
