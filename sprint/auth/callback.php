@@ -75,7 +75,7 @@ if (!$validState) {
 $code = $_GET['code'];
 $redirectUri = getenv('HACKCLUB_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('../auth/callback.php'));
 
-$tokenUrl = 'https://auth.hackclub.com/o../auth/token';
+$tokenUrl = 'https://auth.hackclub.com/oauth/token';
 $post = http_build_query([
     'client_id' => $clientId,
     'client_secret' => $clientSecret,
