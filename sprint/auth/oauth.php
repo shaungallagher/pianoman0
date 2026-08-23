@@ -42,7 +42,7 @@ $params = [
     'state' => $state,
 ];
 
-$authUrl = 'https://auth.hackclub.com/o../auth/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+$authUrl = 'https://auth.hackclub.com/oauth/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
 
 $configuredRedirect = getenv('HACKCLUB_REDIRECT_URI');
 if ($configuredRedirect) {

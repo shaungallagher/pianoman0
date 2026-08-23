@@ -41,6 +41,6 @@ $params = [
     'state' => $state,
 ];
 
-$authUrl = 'https://slack.com/o../auth/v2/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+$authUrl = 'https://slack.com/oauth/v2/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
 header('Location: ' . $authUrl);
 exit;

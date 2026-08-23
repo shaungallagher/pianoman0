@@ -47,6 +47,6 @@ $params = [
     'allow_signup' => 'false'
 ];
 
-$authUrl = 'https://github.com/login/o../auth/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+$authUrl = 'https://github.com/login/oauth/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
 header('Location: ' . $authUrl);
 exit;

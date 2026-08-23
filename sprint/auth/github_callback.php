@@ -90,7 +90,7 @@ $post = http_build_query([
     'state' => $state,
 ]);
 
-$ch = curl_init('https://github.com/login/o../auth/access_token');
+$ch = curl_init('https://github.com/login/oauth/access_token');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
