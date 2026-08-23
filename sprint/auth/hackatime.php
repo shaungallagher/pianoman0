@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once '../config.php';
 
 $page_title = 'Connect Hackatime · Sprint';
 

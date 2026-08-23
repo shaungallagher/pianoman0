@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once '../../config.php';
 require_role('organizer');
 
 $event_id = $_GET['event_id'];

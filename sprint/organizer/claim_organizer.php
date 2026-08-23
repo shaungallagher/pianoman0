@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once '../config.php';
 require_login();
 
 // Only allow claiming if there are no existing organizers
