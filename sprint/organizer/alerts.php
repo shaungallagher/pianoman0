@@ -24,7 +24,7 @@ $stmt = $pdo->query("SELECT ea.*, u.name AS reporter_name, e.name AS event_name 
 $alerts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $page_title = "Incident Alerts · Sprint";
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Incident Alerts</h1>
@@ -56,4 +56,4 @@ include 'includes/header.php';
     </div>
 <?php endif; ?>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

@@ -52,9 +52,9 @@ if (empty($missing)) {
 } else {
     echo "Missing tables: " . implode(', ', $missing) . "\n";
     if (stripos($dsn, 'sqlite') !== false || getenv('DB_USE_SQLITE') === '1') {
-        echo "Run: php scripts/init_sqlite.php\n";
+        echo "Run: php ../scripts/init_sqlite.php\n";
     } else {
-        echo "Run: php scripts/init_db.php\n";
+        echo "Run: php ../scripts/init_db.php\n";
     }
     exit(3);
 }

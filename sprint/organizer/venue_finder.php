@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'includes/functions.php';
+require_once '../includes/functions.php';
 require_role('organizer');
 
 $user = current_user();
@@ -132,7 +132,7 @@ usort($results, function ($a, $b) {
 $top = array_slice($results, 0, 20);
 
 $page_title = 'Venue Finder · Sprint';
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Venue Finder (Experimental)</h1>
@@ -239,5 +239,5 @@ include 'includes/header.php';
     Want to improve results? Update your saved preferences in <a class="link" href="<?= url('/sprint/organizer/venue_preferences.php') ?>">Venue Preferences</a>.
 </p>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 

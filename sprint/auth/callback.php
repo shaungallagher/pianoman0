@@ -51,13 +51,13 @@ if (!$validState) {
     // If this state belongs to GitHub, redirect to the GitHub callback.
     if (($ghSessState && hash_equals($ghSessState, $state)) || ($ghCookieState && hash_equals($ghCookieState, $state))) {
         $qry = http_build_query(['code' => $_GET['code'] ?? '', 'state' => $state]);
-        header('Location: ' . url('auth/github_callback.php') . '?' . $qry);
+        header('Location: ' . url('../auth/github_callback.php') . '?' . $qry);
         exit;
     }
 
 
     http_response_code(400);
-    $loginUrl = url('auth/login.php');
+    $loginUrl = url('../auth/login.php');
     $profileUrl = url('profile.php');
     $loginUrlEsc = htmlspecialchars($loginUrl);
     $profileUrlEsc = htmlspecialchars($profileUrl);
@@ -73,9 +73,9 @@ if (!$validState) {
 }
 
 $code = $_GET['code'];
-$redirectUri = getenv('HACKCLUB_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('auth/callback.php'));
+$redirectUri = getenv('HACKCLUB_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('../auth/callback.php'));
 
-$tokenUrl = 'https://auth.hackclub.com/oauth/token';
+$tokenUrl = 'https://auth.hackclub.com/o../auth/token';
 $post = http_build_query([
     'client_id' => $clientId,
     'client_secret' => $clientSecret,

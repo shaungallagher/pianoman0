@@ -1,5 +1,5 @@
 <?php
-// scripts/migrate_add_judging_mode.php
+// ../scripts/migrate_add_judging_mode.php
 // Adds `judging_mode` column to `events` table if missing.
 $root = dirname(__DIR__);
 require_once $root . '/config.php';

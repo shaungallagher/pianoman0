@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
-require_once 'includes/functions.php';
-require_once 'includes/judge_functions.php';
+require_once '../includes/functions.php';
+require_once '../includes/judge_functions.php';
 
 require_login();
 
@@ -24,7 +24,7 @@ if (($event['judging_mode'] ?? 'judges') === 'judges') {
 $subs = get_event_submissions($pdo, $event_id);
 
 $page_title = "Submissions · " . ($event['name'] ?? 'Event');
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <h1>Submissions for <?= htmlspecialchars($event['name']) ?></h1>
@@ -38,10 +38,10 @@ include 'includes/header.php';
             <h3><?= htmlspecialchars($s['title']) ?></h3>
             <p class="meta">Team: <?= htmlspecialchars($s['team_name']) ?> — <?= htmlspecialchars($s['created_at']) ?></p>
             <p><?= htmlspecialchars(substr($s['description'] ?? '', 0, 240)) ?></p>
-            <p><a class="btn" href="<?= url('judge/score.php') ?>?id=<?= (int)$s['id'] ?>">Score / Review</a></p>
+            <p><a class="btn" href="<?= url('../judge/score.php') ?>?id=<?= (int)$s['id'] ?>">Score / Review</a></p>
         </div>
     <?php endforeach; ?>
     </div>
 <?php endif; ?>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

@@ -43,7 +43,7 @@ foreach ($dsnCandidates as $dsn) {
 
 if (!$pdo) {
     fwrite(STDERR, "Could not connect to MySQL: " . ($lastEx ? $lastEx->getMessage() : "no DSN") . "\n");
-    fwrite(STDERR, "If you are using sqlite, run php scripts/init_sqlite.php instead.\n");
+    fwrite(STDERR, "If you are using sqlite, run php ../scripts/init_sqlite.php instead.\n");
     exit(2);
 }
 

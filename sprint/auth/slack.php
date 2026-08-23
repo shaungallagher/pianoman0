@@ -8,7 +8,7 @@ if (!$clientId) {
     exit;
 }
 
-$redirectUri = getenv('SLACK_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('auth/slack_callback.php'));
+$redirectUri = getenv('SLACK_REDIRECT_URI') ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . url('../auth/slack_callback.php'));
 
 try {
     $state = bin2hex(random_bytes(16));
@@ -41,6 +41,6 @@ $params = [
     'state' => $state,
 ];
 
-$authUrl = 'https://slack.com/oauth/v2/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+$authUrl = 'https://slack.com/o../auth/v2/authorize?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
 header('Location: ' . $authUrl);
 exit;
